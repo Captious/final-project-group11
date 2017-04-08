@@ -10,8 +10,6 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-FinalProject/.idea/compiler.xml
-FinalProject/.idea/misc.xml
-FinalProject/.idea/modules.xml
-FinalProject/.idea/workspace.xml
+FinalProject/.idea/*
 FinalProject/FinalProject.iml
+FinalProject/target/*
