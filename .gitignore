@@ -13,3 +13,6 @@ hs_err_pid*
 FinalProject/.idea/*
 FinalProject/FinalProject.iml
 FinalProject/target/*
+
+.idea/
+FinalProject/final-project.iml
