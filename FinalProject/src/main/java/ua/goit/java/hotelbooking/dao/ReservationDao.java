@@ -1,4 +1,6 @@
 package ua.goit.java.hotelbooking.dao;
 
-public interface ReservationDao extends BaseDao {
+import ua.goit.java.hotelbooking.model.Reservation;
+
+public interface ReservationDao extends BaseDao<Reservation> {
 }

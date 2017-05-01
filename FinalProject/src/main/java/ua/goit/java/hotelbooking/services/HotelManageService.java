@@ -5,7 +5,7 @@ import ua.goit.java.hotelbooking.model.Room;
 
 import java.util.List;
 
-public interface HotelManageService extends ManageService {
+public interface HotelManageService extends ManageService<Hotel> {
     boolean remove(Hotel element);
     Hotel findByName(String name);
     List<Hotel> findByCity(String cityName);
