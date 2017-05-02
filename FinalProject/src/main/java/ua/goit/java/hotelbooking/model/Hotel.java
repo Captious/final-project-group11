@@ -1,8 +1,9 @@
 package ua.goit.java.hotelbooking.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Hotel {
+public class Hotel implements Serializable{
     private Long id;
     private String name;
     private String city;

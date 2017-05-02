@@ -1,8 +1,9 @@
 package ua.goit.java.hotelbooking.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Reservation {
+public class Reservation implements Serializable {
     private Long id;
     private Room room;
     private Date reservationDate;
