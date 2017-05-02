@@ -4,6 +4,10 @@ public class User {
     private Long id;
     private String fio;
 
+    public User(String fio) {
+        this.fio = fio;
+    }
+
     public User(Long id, String fio) {
         this.id = id;
         this.fio = fio;

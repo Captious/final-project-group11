@@ -5,6 +5,11 @@ public class Room {
     private String number;
     Hotel hotel;
 
+    public Room(String number, Hotel hotel) {
+        this.number = number;
+        this.hotel = hotel;
+    }
+
     public Room(Long id, String number, Hotel hotel) {
         this.id = id;
         this.number = number;

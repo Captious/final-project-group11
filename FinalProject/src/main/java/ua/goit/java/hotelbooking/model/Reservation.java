@@ -8,6 +8,12 @@ public class Reservation {
     private Date reservationDate;
     private User user;
 
+    public Reservation(Room room, Date reservationDate, User user) {
+        this.room = room;
+        this.reservationDate = reservationDate;
+        this.user = user;
+    }
+
     public Reservation(Long id, Room room, Date reservationDate, User user) {
         this.id = id;
         this.room = room;

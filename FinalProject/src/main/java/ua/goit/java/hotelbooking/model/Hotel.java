@@ -8,10 +8,21 @@ public class Hotel {
     private String city;
     private List<Room> rooms;
 
+    public Hotel(String name, String city) {
+        this.name = name;
+        this.city = city;
+    }
+
     public Hotel(Long id, String name, String city) {
         this.id = id;
         this.name = name;
         this.city = city;
+    }
+
+    public Hotel(String name, String city, List<Room> rooms) {
+        this.name = name;
+        this.city = city;
+        this.rooms = rooms;
     }
 
     public Hotel(Long id, String name, String city, List<Room> rooms) {
