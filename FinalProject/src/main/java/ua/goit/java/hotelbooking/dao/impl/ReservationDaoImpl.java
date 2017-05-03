@@ -14,7 +14,7 @@ public class ReservationDaoImpl implements ReservationDao{
 
     private ReservationDaoImpl(){
         rooms = (ArrayList<Reservation>) DataSerialization.deserializeData(FILE_PATH);
-        if (rooms == null) rooms = new ArrayList<Reservation>();
+        if (rooms == null) rooms = new ArrayList<>();
     }
 
     private static class ReservationHolder {

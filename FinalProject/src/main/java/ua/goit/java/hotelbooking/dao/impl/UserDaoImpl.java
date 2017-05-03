@@ -14,7 +14,7 @@ public class UserDaoImpl implements UserDao {
 
     private UserDaoImpl(){
         rooms = (ArrayList<User>) DataSerialization.deserializeData(FILE_PATH);
-        if (rooms == null) rooms = new ArrayList<User>();
+        if (rooms == null) rooms = new ArrayList<>();
     }
 
     private static class UserHolder {

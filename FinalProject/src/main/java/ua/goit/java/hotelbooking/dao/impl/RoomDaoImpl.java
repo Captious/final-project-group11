@@ -14,7 +14,7 @@ public class RoomDaoImpl implements RoomDao {
 
     private RoomDaoImpl(){
         rooms = (ArrayList<Room>) DataSerialization.deserializeData(FILE_PATH);
-        if (rooms == null) rooms = new ArrayList<Room>();
+        if (rooms == null) rooms = new ArrayList<>();
     }
 
     private static class RoomHolder {

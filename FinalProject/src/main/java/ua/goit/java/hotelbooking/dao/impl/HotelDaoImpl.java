@@ -14,7 +14,7 @@ public class HotelDaoImpl implements HotelDao{
 
     private HotelDaoImpl(){
         hotels = (ArrayList<Hotel>) DataSerialization.deserializeData(FILE_PATH);
-        if (hotels == null) hotels = new ArrayList<Hotel>();
+        if (hotels == null) hotels = new ArrayList<>();
     }
 
     private static class HotelHolder {

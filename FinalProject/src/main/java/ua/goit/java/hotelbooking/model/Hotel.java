@@ -3,7 +3,7 @@ package ua.goit.java.hotelbooking.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class Hotel implements Serializable{
+public class Hotel implements Serializable, IdManager{
     private Long id;
     private String name;
     private String city;
@@ -14,31 +14,10 @@ public class Hotel implements Serializable{
         this.city = city;
     }
 
-    public Hotel(Long id, String name, String city) {
-        this.id = id;
-        this.name = name;
-        this.city = city;
-    }
-
     public Hotel(String name, String city, List<Room> rooms) {
         this.name = name;
         this.city = city;
         this.rooms = rooms;
-    }
-
-    public Hotel(Long id, String name, String city, List<Room> rooms) {
-        this.id = id;
-        this.name = name;
-        this.city = city;
-        this.rooms = rooms;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -63,5 +42,33 @@ public class Hotel implements Serializable{
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Hotel hotel = (Hotel) o;
+
+        if (!getName().equals(hotel.getName())) return false;
+        return getCity().equals(hotel.getCity());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getName().hashCode();
+        result = 31 * result + getCity().hashCode();
+        return result;
     }
 }
