@@ -7,7 +7,7 @@ public class DataSerialization {
 
     public static Object deserializeData(String filePath){
         try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))){
-            if (in.available()>0) return in.readObject();
+            return in.readObject();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

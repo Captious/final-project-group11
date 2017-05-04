@@ -2,7 +2,7 @@ package ua.goit.java.hotelbooking.model;
 
 import java.io.Serializable;
 
-public class Room implements Serializable, IdManager{
+public class Room implements Serializable {
     private Long id;
     private String number;
     Hotel hotel;
@@ -28,12 +28,10 @@ public class Room implements Serializable, IdManager{
         this.hotel = hotel;
     }
 
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }

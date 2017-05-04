@@ -5,16 +5,21 @@ import ua.goit.java.hotelbooking.dao.utils.DataSerialization;
 import ua.goit.java.hotelbooking.model.Hotel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class HotelDaoImpl implements HotelDao{
+public class HotelDaoImpl extends IdCollectionHolder implements HotelDao{
 
     private List<Hotel> hotels;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/hotel.txt";
+    private static final String entity = "Hotel";
+    private static Long lastId;
 
     private HotelDaoImpl(){
+        super();
         hotels = (ArrayList<Hotel>) DataSerialization.deserializeData(FILE_PATH);
-        if (hotels == null) hotels = new ArrayList<>();
+        lastId = getLastIdCollection().get(entity);
     }
 
     private static class HotelHolder {
@@ -23,6 +28,16 @@ public class HotelDaoImpl implements HotelDao{
 
     public static HotelDaoImpl getInstance(){
         return  HotelHolder.instance;
+    }
+
+    public static Long getLastId() {
+        return lastId;
+    }
+
+    public static void increaseLastId(){
+        lastId++;
+        getLastIdCollection().put(entity, lastId);
+        setLastIdCollection(getLastIdCollection());
     }
 
     @Override
