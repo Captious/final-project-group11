@@ -45,6 +45,15 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     @Override
     public boolean remove(Room element) {
+        try {
+            long id = element.getId();
+            if((rooms.removeIf(x -> x.getId() == id) == true)){
+                DataSerialization.serializeData(FILE_PATH, rooms);
+                return true;
+            }
+        } catch (RuntimeException exception) {
+            System.out.println("There is no such room in database");
+        }
         return false;
     }
 
