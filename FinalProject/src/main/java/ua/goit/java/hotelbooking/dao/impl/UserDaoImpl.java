@@ -11,14 +11,14 @@ import java.util.Map;
 
 public class UserDaoImpl extends IdCollectionHolder implements UserDao {
 
-    private List<User> rooms;
+    private List<User> users;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/user.txt";
     private static final String entity = "User";
     private static Long lastId;
 
     private UserDaoImpl(){
         super();
-        rooms = (ArrayList<User>) DataSerialization.deserializeData(FILE_PATH);
+        users = (ArrayList<User>) DataSerialization.deserializeData(FILE_PATH);
         lastId = getLastIdCollection().get(entity);
     }
 
@@ -46,6 +46,15 @@ public class UserDaoImpl extends IdCollectionHolder implements UserDao {
 
     @Override
     public boolean remove(User element) {
+        try {
+            long id = element.getId();
+            if((users.removeIf(x -> x.getId() == id) == true)){
+                DataSerialization.serializeData(FILE_PATH, users);
+                return true;
+            }
+        } catch (RuntimeException exception) {
+            System.out.println("There is no such user in database");
+        }
         return false;
     }
 
