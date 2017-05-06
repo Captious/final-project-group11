@@ -5,31 +5,27 @@ import ua.goit.java.hotelbooking.dao.utils.DataSerialization;
 import ua.goit.java.hotelbooking.model.Hotel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
     private List<Hotel> hotels;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/hotel.txt";
-    //TODO: Please follow the naming convention. Constant should be in upper case.
-    private static final String entity = "Hotel";
+    private static final String ENTITY = "Hotel";
     private static Long lastId;
 
     private HotelDaoImpl() {
         super();
         hotels = (ArrayList<Hotel>) DataSerialization.deserializeData(FILE_PATH);
-        lastId = getLastIdCollection().get(entity);
+        lastId = getLastIdCollection().get(ENTITY);
     }
 
     private static class HotelHolder {
-        //TODO: Please follow the naming convention. Constant should be in upper case.
-        private final static HotelDaoImpl instance = new HotelDaoImpl();
+        private final static HotelDaoImpl INSTANCE = new HotelDaoImpl();
     }
 
     public static HotelDaoImpl getInstance() {
-        return HotelHolder.instance;
+        return HotelHolder.INSTANCE;
     }
 
     public static Long getLastId() {
@@ -38,7 +34,7 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
     public static void increaseLastId() {
         lastId++;
-        getLastIdCollection().put(entity, lastId);
+        getLastIdCollection().put(ENTITY, lastId);
         setLastIdCollection(getLastIdCollection());
     }
 

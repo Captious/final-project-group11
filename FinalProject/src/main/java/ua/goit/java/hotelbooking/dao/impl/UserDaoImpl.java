@@ -5,27 +5,23 @@ import ua.goit.java.hotelbooking.dao.utils.DataSerialization;
 import ua.goit.java.hotelbooking.model.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class UserDaoImpl extends IdCollectionHolder implements UserDao {
 
     private List<User> users;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/user.txt";
-    //TODO: Please follow the naming convention. Constant should be in upper case.
-    private static final String entity = "User";
+    private static final String ENTITY = "User";
     private static Long lastId;
 
     private UserDaoImpl(){
         super();
         users = (ArrayList<User>) DataSerialization.deserializeData(FILE_PATH);
-        lastId = getLastIdCollection().get(entity);
+        lastId = getLastIdCollection().get(ENTITY);
     }
 
     private static class UserHolder {
-        //TODO: Please follow the naming convention. Constant should be in upper case.
-        private final static UserDaoImpl instance = new UserDaoImpl();
+        private final static UserDaoImpl INSTANCE = new UserDaoImpl();
     }
 
     public static Long getLastId() {
@@ -34,12 +30,12 @@ public class UserDaoImpl extends IdCollectionHolder implements UserDao {
 
     public static void increaseLastId(){
         lastId++;
-        getLastIdCollection().put(entity, lastId);
+        getLastIdCollection().put(ENTITY, lastId);
         setLastIdCollection(getLastIdCollection());
     }
 
     public static UserDaoImpl getInstance(){
-        return  UserHolder.instance;
+        return  UserHolder.INSTANCE;
     }
     @Override
     public User persist(User element) {

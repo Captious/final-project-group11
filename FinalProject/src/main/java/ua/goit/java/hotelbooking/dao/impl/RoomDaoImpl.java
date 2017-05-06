@@ -12,23 +12,21 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     private List<Room> rooms;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/room.txt";
-    //TODO: Please follow the naming convention. Constant should be in upper case.
-    private static final String entity = "Room";
+    private static final String ENTITY = "Room";
     private static Long lastId;
 
     private RoomDaoImpl(){
         super();
         rooms = (ArrayList<Room>) DataSerialization.deserializeData(FILE_PATH);
-        lastId = getLastIdCollection().get(entity);
+        lastId = getLastIdCollection().get(ENTITY);
     }
 
     private static class RoomHolder {
-        //TODO: Please follow the naming convention. Constant should be in upper case.
-        private final static RoomDaoImpl instance = new RoomDaoImpl();
+        private final static RoomDaoImpl INSTANCE = new RoomDaoImpl();
     }
 
     public static RoomDaoImpl getInstance(){
-        return  RoomHolder.instance;
+        return  RoomHolder.INSTANCE;
     }
 
     public static Long getLastId() {
@@ -37,7 +35,7 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     public static void increaseLastId(){
         lastId++;
-        getLastIdCollection().put(entity, lastId);
+        getLastIdCollection().put(ENTITY, lastId);
         setLastIdCollection(getLastIdCollection());
     }
 
@@ -59,7 +57,7 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
             DataSerialization.serializeData(FILE_PATH, getAll());
             return element;
         } catch (RuntimeException exception) {
-            System.out.printf("In the database %s there is no such id - %d.\n", entity, element.getId());
+            System.out.printf("In the database %s there is no such id - %d.\n", ENTITY, element.getId());
             throw new RuntimeException();
         }
     }
