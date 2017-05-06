@@ -1,6 +1,7 @@
 package ua.goit.java.hotelbooking.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hotel implements Serializable {
@@ -12,6 +13,7 @@ public class Hotel implements Serializable {
     public Hotel(String name, String city) {
         this.name = name;
         this.city = city;
+        this.rooms = new ArrayList<>();
     }
 
     public Hotel(String name, String city, List<Room> rooms) {

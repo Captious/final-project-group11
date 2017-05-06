@@ -6,6 +6,7 @@ import ua.goit.java.hotelbooking.model.Room;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
@@ -42,7 +43,25 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     @Override
     public Room persist(Room element) {
-        return null;
+        if (element.getId() == null){
+            element.setId(getLastId());
+            increaseLastId();
+            getAll().add(element);
+            DataSerialization.serializeData(FILE_PATH, getAll());
+            return element;
+        }
+        try {
+            int index = IntStream.range(0, getAll().size())
+                    .filter(i -> element.getId().equals(getAll().get(i).getId()))
+                    .findFirst()
+                    .getAsInt();
+            getAll().set(index, element);
+            DataSerialization.serializeData(FILE_PATH, getAll());
+            return element;
+        } catch (RuntimeException exception) {
+            System.out.printf("In the database %s there is no such id - %d.\n", entity, element.getId());
+            throw new RuntimeException();
+        }
     }
 
     @Override
@@ -64,7 +83,7 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     @Override
     public List<Room> getAll() {
-        return null;
+        return rooms;
     }
 
     @Override
