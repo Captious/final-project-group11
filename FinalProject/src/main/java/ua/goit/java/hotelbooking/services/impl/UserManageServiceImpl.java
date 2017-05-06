@@ -16,7 +16,7 @@ public class UserManageServiceImpl implements UserManageService{
 
     @Override
     public User edit(User element) {
-        return  userDao.persist(element);
+        return userDao.persist(element);
     }
 
     @Override
