@@ -40,7 +40,29 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
     @Override
     public Hotel persist(Hotel element) {
-        return null;
+
+        Long elementID = element.getId();
+        if (elementID == null){
+            this.increaseLastId();
+            element.setId(this.lastId);
+            hotels.add(element);
+        } else{
+
+            boolean finding = false;
+            for (int i = 0; i < hotels.size(); i++) {
+                if (hotels.get(i).getId() == elementID){
+                    hotels.set(i,element);
+                    finding = true;
+                    break;
+                }
+            }
+
+            if (!finding){
+                new RuntimeException("There is no such hotel in database");
+            }
+        }
+        DataSerialization.serializeData(FILE_PATH, hotels);
+        return element;
     }
 
     @Override

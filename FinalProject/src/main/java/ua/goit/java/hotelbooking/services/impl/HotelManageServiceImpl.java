@@ -17,7 +17,7 @@ public class HotelManageServiceImpl implements HotelManageService {
 
     @Override
     public void add(Hotel element) {
-
+        hotelDao.persist(element);
     }
 
     @Override
