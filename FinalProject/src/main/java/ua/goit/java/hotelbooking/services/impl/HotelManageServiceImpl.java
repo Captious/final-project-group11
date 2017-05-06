@@ -22,7 +22,7 @@ public class HotelManageServiceImpl implements HotelManageService {
 
     @Override
     public Hotel edit(Hotel element) {
-        return null;
+        return hotelDao.persist(element);
     }
 
     @Override
