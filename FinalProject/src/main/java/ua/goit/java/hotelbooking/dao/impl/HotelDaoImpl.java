@@ -41,6 +41,7 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
     @Override
     public Hotel persist(Hotel element) {
 
+        getAll();
         Long elementID = element.getId();
         if (elementID == null){
             this.increaseLastId();
