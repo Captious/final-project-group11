@@ -46,7 +46,9 @@ public class HotelManageServiceImpl implements HotelManageService {
             room.setHotel(hotel);
             hotel.getRooms().add(roomDao.persist(room));
             hotelDao.persist(hotel);
-        } catch (RuntimeException exception) {}
+        } catch (RuntimeException exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 
     @Override
