@@ -13,6 +13,7 @@ public class ReservationDaoImpl extends IdCollectionHolder implements Reservatio
 
     private List<Reservation> rooms;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/reservation.txt";
+    //TODO: Please follow the naming convention. Constant should be in upper case.
     private static final String entity = "Reservation";
     private static Long lastId;
 
@@ -23,6 +24,7 @@ public class ReservationDaoImpl extends IdCollectionHolder implements Reservatio
     }
 
     private static class ReservationHolder {
+        //TODO: Please follow the naming convention. Constant should be in upper case.
         private final static ReservationDaoImpl instance = new ReservationDaoImpl();
     }
 

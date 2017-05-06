@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Room implements Serializable {
     private Long id;
     private String number;
+    //TODO: Please, make it private.
     Hotel hotel;
 
     public Room(String number, Hotel hotel) {

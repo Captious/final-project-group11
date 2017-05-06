@@ -13,6 +13,7 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
     private List<Hotel> hotels;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/hotel.txt";
+    //TODO: Please follow the naming convention. Constant should be in upper case.
     private static final String entity = "Hotel";
     private static Long lastId;
 
@@ -23,6 +24,7 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
     }
 
     private static class HotelHolder {
+        //TODO: Please follow the naming convention. Constant should be in upper case.
         private final static HotelDaoImpl instance = new HotelDaoImpl();
     }
 
@@ -47,8 +49,11 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
     @Override
     public boolean remove(Hotel element) {
+        //TODO: Please, remove try block.
         try {
+            //TODO: Please add check for null. If id is null the method should throw exception.
             long id = element.getId();
+            //TODO: removeIf returns boolean. Please remove unnecessary check.
             if((hotels.removeIf(x -> x.getId() == id) == true)){
                 DataSerialization.serializeData(FILE_PATH, hotels);
                 return true;
@@ -72,6 +77,7 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
     @Override
     public List<Hotel> getByCity(String city) {
         List<Hotel> answer = new ArrayList<>();
+        //TODO: String values are not comparing by `==`. Please use for that `equals()`.
         hotels.forEach(x ->{if(x.getCity() == city) answer.add(x);});
         return answer;
     }

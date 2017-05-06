@@ -11,6 +11,7 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     private List<Room> rooms;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/room.txt";
+    //TODO: Please follow the naming convention. Constant should be in upper case.
     private static final String entity = "Room";
     private static Long lastId;
 
@@ -21,6 +22,7 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
     }
 
     private static class RoomHolder {
+        //TODO: Please follow the naming convention. Constant should be in upper case.
         private final static RoomDaoImpl instance = new RoomDaoImpl();
     }
 
@@ -45,8 +47,11 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     @Override
     public boolean remove(Room element) {
+        //TODO: Please, remove try block.
         try {
+            //TODO: Please add check for null. If id is null the method should throw exception.
             long id = element.getId();
+            //TODO: removeIf returns boolean. Please remove unnecessary check.
             if((rooms.removeIf(x -> x.getId() == id) == true)){
                 DataSerialization.serializeData(FILE_PATH, rooms);
                 return true;

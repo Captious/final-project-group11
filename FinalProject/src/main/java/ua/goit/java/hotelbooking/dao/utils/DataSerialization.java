@@ -10,6 +10,7 @@ public class DataSerialization {
             return in.readObject();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            //TODO: Please, use multiple catching.
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -22,6 +23,7 @@ public class DataSerialization {
             out.writeObject(obj);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            //TODO: Please, use multiple catching.
         } catch (IOException e) {
             e.printStackTrace();
         }
