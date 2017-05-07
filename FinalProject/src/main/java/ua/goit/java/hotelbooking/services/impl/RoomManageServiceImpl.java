@@ -8,7 +8,11 @@ import ua.goit.java.hotelbooking.services.RoomManageService;
 
 public class RoomManageServiceImpl implements RoomManageService {
 
-    private RoomDao roomDao = RoomDaoImpl.getInstance();
+    private RoomDao roomDao;
+
+    public RoomManageServiceImpl() {
+        this.roomDao = RoomDaoImpl.getInstance();
+    }
 
     @Override
     public void add(Room element) {
@@ -17,15 +21,11 @@ public class RoomManageServiceImpl implements RoomManageService {
 
     @Override
     public Room edit(Room element) {
-        //TODO: Return the object that returned from `roomDao.persist()`.
         try {
-            roomDao.persist(element);
+            return roomDao.persist(element);
         } catch (RuntimeException exception) {
-            //TODO: Please, rethrow this exception. Handling of exceptions will be implement in other US.
-            System.out.println(exception.getMessage());
+            throw new RuntimeException();
         }
-        //TODO: Please, remove this return.
-        return element;
     }
 
     @Override
