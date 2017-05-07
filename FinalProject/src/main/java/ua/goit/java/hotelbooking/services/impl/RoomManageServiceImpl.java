@@ -24,7 +24,7 @@ public class RoomManageServiceImpl implements RoomManageService {
         try {
             return roomDao.persist(element);
         } catch (RuntimeException exception) {
-            throw new RuntimeException();
+            throw new RuntimeException(exception.getMessage());
         }
     }
 

@@ -54,7 +54,7 @@ public class HotelManageServiceImpl implements HotelManageService {
             hotel.getRooms().add(roomDao.persist(room));
             hotelDao.persist(hotel);
         } catch (RuntimeException exception) {
-            throw new RuntimeException();
+            throw new RuntimeException(exception.getMessage());
         }
     }
 
