@@ -68,17 +68,13 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
     @Override
     public boolean remove(Hotel element) {
-        //TODO: Please, remove try block.
-        try {
-            //TODO: Please add check for null. If id is null the method should throw exception.
-            long id = element.getId();
-            //TODO: removeIf returns boolean. Please remove unnecessary check.
-            if((hotels.removeIf(x -> x.getId() == id) == true)){
-                DataSerialization.serializeData(FILE_PATH, hotels);
-                return true;
-            }
-        } catch (RuntimeException exception) {
-            System.out.println("There is no such hotel in database");
+        long id = element.getId();
+        if(Long.valueOf(id) == null){
+            throw new RuntimeException("There is no such hotel in database");
+        }
+        if((getAll().removeIf(x -> x.getId() == id) == true)) {
+            DataSerialization.serializeData(FILE_PATH, getAll());
+            return true;
         }
         return false;
     }
@@ -97,7 +93,7 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
     public List<Hotel> getByCity(String city) {
         List<Hotel> answer = new ArrayList<>();
         //TODO: String values are not comparing by `==`. Please use for that `equals()`.
-        hotels.forEach(x ->{if(x.getCity() == city) answer.add(x);});
+        getAll().forEach(x ->{if(x.getCity() == city) answer.add(x);});
         return answer;
     }
 

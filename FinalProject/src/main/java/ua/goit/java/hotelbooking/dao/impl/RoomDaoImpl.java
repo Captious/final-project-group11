@@ -62,17 +62,13 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     @Override
     public boolean remove(Room element) {
-        //TODO: Please, remove try block.
-        try {
-            //TODO: Please add check for null. If id is null the method should throw exception.
-            long id = element.getId();
-            //TODO: removeIf returns boolean. Please remove unnecessary check.
-            if((rooms.removeIf(x -> x.getId() == id) == true)){
-                DataSerialization.serializeData(FILE_PATH, rooms);
-                return true;
-            }
-        } catch (RuntimeException exception) {
-            System.out.println("There is no such room in database");
+        long id = element.getId();
+        if(Long.valueOf(id) == null){
+            throw new RuntimeException("There is no such hotel in database");
+        }
+        if((getAll().removeIf(x -> x.getId() == id) == true)) {
+            DataSerialization.serializeData(FILE_PATH, getAll());
+            return true;
         }
         return false;
     }

@@ -32,4 +32,12 @@ public class RoomManageServiceImpl implements RoomManageService {
     public Room findByHotel(Room room, Hotel hotel) {
         return null;
     }
+
+
+    public boolean remove(Room element) {
+        return roomDao.remove(element);
+    }
 }
+
+
+

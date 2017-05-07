@@ -21,6 +21,6 @@ public class UserManageServiceImpl implements UserManageService{
 
     @Override
     public boolean remove(User user) {
-        return false;
+        return userDao.remove(user);
     }
 }

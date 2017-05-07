@@ -32,7 +32,7 @@ public class HotelManageServiceImpl implements HotelManageService {
 
     @Override
     public boolean remove(Hotel element) {
-        return false;
+        return hotelDao.remove(element);
     }
 
     @Override
