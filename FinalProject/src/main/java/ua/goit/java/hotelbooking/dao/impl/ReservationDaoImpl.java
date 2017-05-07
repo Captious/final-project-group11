@@ -7,16 +7,16 @@ import ua.goit.java.hotelbooking.model.Reservation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationDaoImpl extends IdCollectionHolder implements ReservationDao{
+public class ReservationDaoImpl extends IdCollectionHolder implements ReservationDao {
 
-    private List<Reservation> rooms;
+    private List<Reservation> reservations;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/reservation.txt";
     private static final String ENTITY = "Reservation";
     private static Long lastId;
 
-    private ReservationDaoImpl(){
+    private ReservationDaoImpl() {
         super();
-        rooms = (ArrayList<Reservation>) DataSerialization.deserializeData(FILE_PATH);
+        reservations = (ArrayList<Reservation>) DataSerialization.deserializeData(FILE_PATH);
         lastId = getLastIdCollection().get(ENTITY);
     }
 
@@ -32,7 +32,7 @@ public class ReservationDaoImpl extends IdCollectionHolder implements Reservatio
         return lastId;
     }
 
-    public static void increaseLastId(){
+    public static void increaseLastId() {
         lastId++;
         getLastIdCollection().put(ENTITY, lastId);
         setLastIdCollection(getLastIdCollection());
@@ -40,7 +40,14 @@ public class ReservationDaoImpl extends IdCollectionHolder implements Reservatio
 
     @Override
     public Reservation persist(Reservation element) {
-        return null;
+        if (getAll().contains(element)) {
+            throw new RuntimeException(String.format("This reservation already exists in the database %s", ENTITY));
+        } else {
+            increaseLastId();
+            element.setId(getLastId());
+            getAll().add(element);
+        }
+        return element;
     }
 
     @Override
@@ -50,6 +57,6 @@ public class ReservationDaoImpl extends IdCollectionHolder implements Reservatio
 
     @Override
     public List<Reservation> getAll() {
-        return null;
+        return reservations;
     }
 }
