@@ -42,24 +42,23 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
     @Override
     public Room persist(Room element) {
         if (element.getId() == null){
-            element.setId(getLastId());
             increaseLastId();
+            element.setId(getLastId());
             getAll().add(element);
-            DataSerialization.serializeData(FILE_PATH, getAll());
-            return element;
+        } else {
+            try {
+                int index = IntStream.range(0, getAll().size())
+                        .filter(i -> element.getId().equals(getAll().get(i).getId()))
+                        .findFirst()
+                        .getAsInt();
+                getAll().set(index, element);
+            } catch (RuntimeException exception) {
+                throw new RuntimeException(String.format("In the database %s there is no such id - %d.",
+                        ENTITY, element.getId()));
+            }
         }
-        try {
-            int index = IntStream.range(0, getAll().size())
-                    .filter(i -> element.getId().equals(getAll().get(i).getId()))
-                    .findFirst()
-                    .getAsInt();
-            getAll().set(index, element);
-            DataSerialization.serializeData(FILE_PATH, getAll());
-            return element;
-        } catch (RuntimeException exception) {
-            throw new RuntimeException(String.format("In the database %s there is no such id - %d.",
-                    ENTITY, element.getId()));
-        }
+        DataSerialization.serializeData(FILE_PATH, getAll());
+        return element;
     }
 
     @Override

@@ -15,6 +15,7 @@ public class DataSerialization {
         }
         return null;
     }
+
     public static void serializeData(String filePath, Object obj){
         try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filePath))){
             out.writeObject(obj);
