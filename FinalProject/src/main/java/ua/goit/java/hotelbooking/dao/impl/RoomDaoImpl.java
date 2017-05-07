@@ -53,8 +53,8 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
                         .getAsInt();
                 getAll().set(index, element);
             } catch (RuntimeException exception) {
-                throw new RuntimeException(String.format("In the database %s there is no such id - %d.",
-                        ENTITY, element.getId()));
+                throw new RuntimeException(String.format("There is no element with that ID (%d) in the databaseIn %s",
+                        element.getId(), ENTITY));
             }
         }
         DataSerialization.serializeData(FILE_PATH, getAll());

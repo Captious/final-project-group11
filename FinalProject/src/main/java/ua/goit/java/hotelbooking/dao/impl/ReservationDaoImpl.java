@@ -40,18 +40,26 @@ public class ReservationDaoImpl extends IdCollectionHolder implements Reservatio
 
     @Override
     public Reservation persist(Reservation element) {
-        if (getAll().contains(element)) {
+        if (element.getId() != null){
             throw new RuntimeException(String.format("This reservation already exists in the database %s", ENTITY));
         } else {
             increaseLastId();
             element.setId(getLastId());
             getAll().add(element);
         }
+        DataSerialization.serializeData(FILE_PATH, ENTITY);
         return element;
     }
 
     @Override
     public boolean remove(Reservation element) {
+        if (element.getId() == null){
+            throw new RuntimeException(String.format("There is no such element in the database %s", ENTITY));
+        }
+        if (getAll().removeIf(reservation -> reservation.getId().equals(element.getId()))){
+            DataSerialization.serializeData(FILE_PATH, getAll());
+            return true;
+        }
         return false;
     }
 

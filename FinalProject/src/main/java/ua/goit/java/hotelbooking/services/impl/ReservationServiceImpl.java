@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class ReservationServiceImpl implements ReservationService {
 
-    ReservationDao reservationDao = ReservationDaoImpl.getInstance();
+    private ReservationDao reservationDao = ReservationDaoImpl.getInstance();
 
     @Override
     public void add(Room room, Date date, User user) {
@@ -25,6 +25,11 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public boolean remove(Reservation reservation) {
+        try {
+            return reservationDao.remove(reservation);
+        } catch (RuntimeException exception) {
+            System.out.println(exception.getMessage());
+        }
         return false;
     }
 }
