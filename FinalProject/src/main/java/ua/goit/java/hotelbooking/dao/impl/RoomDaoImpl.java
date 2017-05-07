@@ -62,11 +62,11 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     @Override
     public boolean remove(Room element) {
-        long id = element.getId();
-        if(Long.valueOf(id) == null){
+        Long id = element.getId();
+        if(id == null){
             throw new RuntimeException("There is no such hotel in database");
         }
-        if((getAll().removeIf(x -> x.getId() == id) == true)) {
+        if((getAll().removeIf(x -> x.getId().equals(id)))) {
             DataSerialization.serializeData(FILE_PATH, getAll());
             return true;
         }
