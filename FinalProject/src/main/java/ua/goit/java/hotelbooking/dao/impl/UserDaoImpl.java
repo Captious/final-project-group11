@@ -9,15 +9,12 @@ import java.util.List;
 
 public class UserDaoImpl extends IdCollectionHolder implements UserDao {
 
-    //TODO: Please, remove this field. Use `getAll` method for getting users from file.
-    private List<User> users;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/user.txt";
     private static final String ENTITY = "User";
     private static Long lastId;
 
-    private UserDaoImpl(){
+    private UserDaoImpl() {
         super();
-        users = (ArrayList<User>) DataSerialization.deserializeData(FILE_PATH);
         lastId = getLastIdCollection().get(ENTITY);
     }
 
@@ -25,13 +22,11 @@ public class UserDaoImpl extends IdCollectionHolder implements UserDao {
         private final static UserDaoImpl INSTANCE = new UserDaoImpl();
     }
 
-    //TODO: Why public static? It can be a private method.
-    public static Long getLastId() {
+    private Long getLastId() {
         return lastId;
     }
 
-    //TODO: Why public static? It can be a private method.
-    public static void increaseLastId(){
+    private void increaseLastId(){
         lastId++;
         getLastIdCollection().put(ENTITY, lastId);
         setLastIdCollection(getLastIdCollection());
@@ -64,6 +59,6 @@ public class UserDaoImpl extends IdCollectionHolder implements UserDao {
 
     @Override
     public List<User> getAll() {
-        return null;
+        return (ArrayList<User>) DataSerialization.deserializeData(FILE_PATH);
     }
 }

@@ -10,15 +10,12 @@ import java.util.stream.IntStream;
 
 public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
-    //TODO: Please, remove this field. Use `getAll` method for getting rooms from file.
-    private List<Room> rooms;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/room.txt";
     private static final String ENTITY = "Room";
     private static Long lastId;
 
-    private RoomDaoImpl(){
+    private RoomDaoImpl() {
         super();
-        rooms = (ArrayList<Room>) DataSerialization.deserializeData(FILE_PATH);
         lastId = getLastIdCollection().get(ENTITY);
     }
 
@@ -26,17 +23,15 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
         private final static RoomDaoImpl INSTANCE = new RoomDaoImpl();
     }
 
-    public static RoomDaoImpl getInstance(){
+    public static RoomDaoImpl getInstance() {
         return  RoomHolder.INSTANCE;
     }
 
-    //TODO: Why public static? It can be a private method.
-    public static Long getLastId() {
+    private Long getLastId() {
         return lastId;
     }
 
-    //TODO: Why public static? It can be a private method.
-    public static void increaseLastId(){
+    private void increaseLastId(){
         lastId++;
         getLastIdCollection().put(ENTITY, lastId);
         setLastIdCollection(getLastIdCollection());
@@ -44,24 +39,24 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     @Override
     public Room persist(Room element) {
-        //TODO: Please, create local variable with list of all items. `list.get(index)` is more faster instead of reading data from file and getting by index.
+        List<Room> rooms = getAll();
         if (element.getId() == null){
             increaseLastId();
             element.setId(getLastId());
-            getAll().add(element);
+            rooms.add(element);
         } else {
             try {
-                int index = IntStream.range(0, getAll().size())
-                        .filter(i -> element.getId().equals(getAll().get(i).getId()))
+                int index = IntStream.range(0, rooms.size())
+                        .filter(i -> element.getId().equals(rooms.get(i).getId()))
                         .findFirst()
                         .getAsInt();
-                getAll().set(index, element);
+                rooms.set(index, element);
             } catch (RuntimeException exception) {
                 throw new RuntimeException(String.format("There is no element with that ID (%d) in the databaseIn %s",
                         element.getId(), ENTITY));
             }
         }
-        DataSerialization.serializeData(FILE_PATH, getAll());
+        DataSerialization.serializeData(FILE_PATH, rooms);
         return element;
     }
 
@@ -84,7 +79,7 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     @Override
     public List<Room> getAll() {
-        return rooms;
+        return (ArrayList<Room>) DataSerialization.deserializeData(FILE_PATH);
     }
 
     @Override

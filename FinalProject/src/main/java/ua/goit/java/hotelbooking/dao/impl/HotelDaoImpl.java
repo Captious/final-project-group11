@@ -9,15 +9,12 @@ import java.util.List;
 
 public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
-    //TODO: Please, remove this field. Use `getAll() method for getting hotels from file.
-    private List<Hotel> hotels;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/hotel.txt";
     private static final String ENTITY = "Hotel";
     private static Long lastId;
 
     private HotelDaoImpl() {
         super();
-        hotels = (ArrayList<Hotel>) DataSerialization.deserializeData(FILE_PATH);
         lastId = getLastIdCollection().get(ENTITY);
     }
 
@@ -29,13 +26,11 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
         return HotelHolder.INSTANCE;
     }
 
-    //TODO: Why public static? It can be a private method.
-    public static Long getLastId() {
+    private Long getLastId() {
         return lastId;
     }
 
-    //TODO: Why public static? It can be a private method.
-    public static void increaseLastId() {
+    private void increaseLastId() {
         lastId++;
         getLastIdCollection().put(ENTITY, lastId);
         setLastIdCollection(getLastIdCollection());
@@ -90,7 +85,7 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
     @Override
     public List<Hotel> getAll() {
-        return null;
+        return (ArrayList<Hotel>) DataSerialization.deserializeData(FILE_PATH);
     }
 
     @Override
