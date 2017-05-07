@@ -17,11 +17,14 @@ public class RoomManageServiceImpl implements RoomManageService {
 
     @Override
     public Room edit(Room element) {
+        //TODO: Return the object that returned from `roomDao.persist()`.
         try {
             roomDao.persist(element);
         } catch (RuntimeException exception) {
+            //TODO: Please, rethrow this exception. Handling of exceptions will be implement in other US.
             System.out.println(exception.getMessage());
         }
+        //TODO: Please, remove this return.
         return element;
     }
 

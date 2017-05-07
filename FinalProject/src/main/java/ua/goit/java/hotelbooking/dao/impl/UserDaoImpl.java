@@ -9,6 +9,7 @@ import java.util.List;
 
 public class UserDaoImpl extends IdCollectionHolder implements UserDao {
 
+    //TODO: Please, remove this field. Use `getAll` method for getting users from file.
     private List<User> users;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/user.txt";
     private static final String ENTITY = "User";
@@ -24,10 +25,12 @@ public class UserDaoImpl extends IdCollectionHolder implements UserDao {
         private final static UserDaoImpl INSTANCE = new UserDaoImpl();
     }
 
+    //TODO: Why public static? It can be a private method.
     public static Long getLastId() {
         return lastId;
     }
 
+    //TODO: Why public static? It can be a private method.
     public static void increaseLastId(){
         lastId++;
         getLastIdCollection().put(ENTITY, lastId);

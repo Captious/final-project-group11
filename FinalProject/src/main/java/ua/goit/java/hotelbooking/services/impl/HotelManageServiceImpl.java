@@ -12,6 +12,7 @@ import java.util.List;
 
 public class HotelManageServiceImpl implements HotelManageService {
 
+    //TODO: Please, initialize fields in default constructor.
     private HotelDao hotelDao = HotelDaoImpl.getInstance();
     private RoomDao roomDao = RoomDaoImpl.getInstance();
 
@@ -43,10 +44,12 @@ public class HotelManageServiceImpl implements HotelManageService {
     @Override
     public void addRoom(Hotel hotel, Room room) {
         try {
+            //TODO: There need to persist room too.
             room.setHotel(hotel);
             hotel.getRooms().add(roomDao.persist(room));
             hotelDao.persist(hotel);
         } catch (RuntimeException exception) {
+            //TODO: Please, rethrow this exception. Handling of exceptions will be implement in other US.
             System.out.println(exception.getMessage());
         }
     }

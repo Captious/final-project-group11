@@ -11,6 +11,7 @@ import java.util.Date;
 
 public class ReservationServiceImpl implements ReservationService {
 
+    //TODO: Please, initialize fields in default constructor.
     private ReservationDao reservationDao = ReservationDaoImpl.getInstance();
 
     @Override
@@ -19,6 +20,7 @@ public class ReservationServiceImpl implements ReservationService {
         try {
             reservationDao.persist(reservation);
         } catch (RuntimeException exception) {
+            //TODO: Please, rethrow this exception. Handling of exceptions will be implement in other US.
             System.out.println(exception.getMessage());
         }
     }
@@ -30,6 +32,7 @@ public class ReservationServiceImpl implements ReservationService {
         } catch (RuntimeException exception) {
             System.out.println(exception.getMessage());
         }
+        //TODO: Remove it return. In catch block just rethrow an exception.
         return false;
     }
 }

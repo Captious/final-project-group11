@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ReservationDaoImpl extends IdCollectionHolder implements ReservationDao {
 
+    //TODO: Please, remove this field. Use `getAll` method for getting reservation from file.
     private List<Reservation> reservations;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/reservation.txt";
     private static final String ENTITY = "Reservation";
@@ -28,10 +29,12 @@ public class ReservationDaoImpl extends IdCollectionHolder implements Reservatio
         return  ReservationHolder.INSTANCE;
     }
 
+    //TODO: Why public static? It can be a private method.
     public static Long getLastId() {
         return lastId;
     }
 
+    //TODO: Why public static? It can be a private method.
     public static void increaseLastId() {
         lastId++;
         getLastIdCollection().put(ENTITY, lastId);
@@ -40,6 +43,7 @@ public class ReservationDaoImpl extends IdCollectionHolder implements Reservatio
 
     @Override
     public Reservation persist(Reservation element) {
+        //TODO: Please, create local variable with list of all items. `list.get(index)` is more faster instead of reading data from file and getting by index.
         if (element.getId() != null){
             throw new RuntimeException(String.format("This reservation already exists in the database %s", ENTITY));
         } else {
@@ -53,6 +57,7 @@ public class ReservationDaoImpl extends IdCollectionHolder implements Reservatio
 
     @Override
     public boolean remove(Reservation element) {
+        //TODO: Please, create local variable with list of all items. `list.get(index)` is more faster instead of reading data from file and getting by index.
         if (element.getId() == null){
             throw new RuntimeException(String.format("There is no such element in the database %s", ENTITY));
         }

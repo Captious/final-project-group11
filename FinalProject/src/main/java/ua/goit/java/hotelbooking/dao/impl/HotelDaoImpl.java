@@ -9,6 +9,7 @@ import java.util.List;
 
 public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
+    //TODO: Please, remove this field. Use `getAll() method for getting hotels from file.
     private List<Hotel> hotels;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/hotel.txt";
     private static final String ENTITY = "Hotel";
@@ -28,10 +29,12 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
         return HotelHolder.INSTANCE;
     }
 
+    //TODO: Why public static? It can be a private method.
     public static Long getLastId() {
         return lastId;
     }
 
+    //TODO: Why public static? It can be a private method.
     public static void increaseLastId() {
         lastId++;
         getLastIdCollection().put(ENTITY, lastId);
@@ -46,11 +49,13 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
         if (elementID == null){
             this.increaseLastId();
             element.setId(this.lastId);
+            //TODO: Don't use this List. Create local variable for that and use it. (Initialize local variable by calling `getAll()` method)
             hotels.add(element);
         } else{
 
             boolean finding = false;
             for (int i = 0; i < hotels.size(); i++) {
+                //TODO: Any objects are not comparing by `==`. Please, use for this `equals()`
                 if (hotels.get(i).getId() == elementID){
                     hotels.set(i,element);
                     finding = true;

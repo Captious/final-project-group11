@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 
 public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
+    //TODO: Please, remove this field. Use `getAll` method for getting rooms from file.
     private List<Room> rooms;
     private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/room.txt";
     private static final String ENTITY = "Room";
@@ -29,10 +30,12 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
         return  RoomHolder.INSTANCE;
     }
 
+    //TODO: Why public static? It can be a private method.
     public static Long getLastId() {
         return lastId;
     }
 
+    //TODO: Why public static? It can be a private method.
     public static void increaseLastId(){
         lastId++;
         getLastIdCollection().put(ENTITY, lastId);
@@ -41,6 +44,7 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     @Override
     public Room persist(Room element) {
+        //TODO: Please, create local variable with list of all items. `list.get(index)` is more faster instead of reading data from file and getting by index.
         if (element.getId() == null){
             increaseLastId();
             element.setId(getLastId());
