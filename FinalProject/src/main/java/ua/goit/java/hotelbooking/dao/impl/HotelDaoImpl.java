@@ -38,21 +38,19 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
     }
 
     @Override
-    public Hotel persist(Hotel element) {return null;}
+    public Hotel persist(Hotel element) {
 
-      /*  getAll();
+        List<Hotel> hotels = getAll();
         Long elementID = element.getId();
         if (elementID == null){
             this.increaseLastId();
             element.setId(this.lastId);
-            //TODO: Don't use this List. Create local variable for that and use it. (Initialize local variable by calling `getAll()` method)
             hotels.add(element);
         } else{
 
             boolean finding = false;
             for (int i = 0; i < hotels.size(); i++) {
-                //TODO: Any objects are not comparing by `==`. Please, use for this `equals()`
-                if (hotels.get(i).getId() == elementID){
+                if (hotels.get(i).getId().equals(elementID)){
                     hotels.set(i,element);
                     finding = true;
                     break;
@@ -60,12 +58,12 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
             }
 
             if (!finding){
-                new RuntimeException("There is no such hotel in database");
+                throw new RuntimeException("There is no such hotel in database");
             }
         }
         DataSerialization.serializeData(FILE_PATH, hotels);
         return element;
-    }/*/
+    }
 
     @Override
     public boolean remove(Hotel element) {
