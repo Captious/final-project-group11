@@ -30,7 +30,7 @@ public class RoomManageServiceImpl implements RoomManageService {
 
     @Override
     public Room findByHotel(Room room, Hotel hotel) {
-        return null;
+        return roomDao.getByHotel(room.getNumber(),hotel.getId());
     }
 
 
