@@ -52,7 +52,7 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
                         .getAsInt();
                 rooms.set(index, element);
             } catch (RuntimeException exception) {
-                throw new RuntimeException(String.format("There is no element with that ID (%d) in the databaseIn %s",
+                throw new RuntimeException(String.format("There is no element with that ID (%d) in the database %s",
                         element.getId(), ENTITY));
             }
         }
@@ -62,12 +62,13 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     @Override
     public boolean remove(Room element) {
+        List<Room> rooms = getAll();
         Long id = element.getId();
         if(id == null){
             throw new RuntimeException("There is no such hotel in database");
         }
-        if((getAll().removeIf(x -> x.getId().equals(id)))) {
-            DataSerialization.serializeData(FILE_PATH, getAll());
+        if((rooms.removeIf(x -> x.getId().equals(id)))) {
+            DataSerialization.serializeData(FILE_PATH, rooms);
             return true;
         }
         return false;

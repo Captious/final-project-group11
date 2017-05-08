@@ -69,12 +69,13 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
     @Override
     public boolean remove(Hotel element) {
+        List<Hotel> hotels = getAll();
         Long id = element.getId();
         if(id == null){
             throw new RuntimeException("There is no such hotel in database");
         }
-        if((getAll().removeIf(x -> x.getId().equals(id)))) {
-            DataSerialization.serializeData(FILE_PATH, getAll());
+        if((hotels.removeIf(x -> x.getId().equals(id)))) {
+            DataSerialization.serializeData(FILE_PATH, hotels);
             return true;
         }
         return false;

@@ -22,6 +22,10 @@ public class UserDaoImpl extends IdCollectionHolder implements UserDao {
         private final static UserDaoImpl INSTANCE = new UserDaoImpl();
     }
 
+    public static UserDaoImpl getInstance(){
+        return  UserHolder.INSTANCE;
+    }
+
     private Long getLastId() {
         return lastId;
     }
@@ -32,9 +36,6 @@ public class UserDaoImpl extends IdCollectionHolder implements UserDao {
         setLastIdCollection(getLastIdCollection());
     }
 
-    public static UserDaoImpl getInstance(){
-        return  UserHolder.INSTANCE;
-    }
     @Override
     public User persist(User element) {
         return null;
@@ -42,12 +43,13 @@ public class UserDaoImpl extends IdCollectionHolder implements UserDao {
 
     @Override
     public boolean remove(User element) {
+        List<User> users = getAll();
         Long id = element.getId();
         if(id == null){
             throw new RuntimeException("There is no such hotel in database");
         }
-        if((getAll().removeIf(x -> x.getId().equals(id)))) {
-            DataSerialization.serializeData(FILE_PATH, getAll());
+        if((users.removeIf(x -> x.getId().equals(id)))) {
+            DataSerialization.serializeData(FILE_PATH, users);
             return true;
         }
         return false;
