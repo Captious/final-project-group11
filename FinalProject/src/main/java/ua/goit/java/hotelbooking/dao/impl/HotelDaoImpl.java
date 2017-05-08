@@ -6,6 +6,7 @@ import ua.goit.java.hotelbooking.model.Hotel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
@@ -37,9 +38,9 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
     }
 
     @Override
-    public Hotel persist(Hotel element) {
+    public Hotel persist(Hotel element) {return null;}
 
-        getAll();
+      /*  getAll();
         Long elementID = element.getId();
         if (elementID == null){
             this.increaseLastId();
@@ -64,7 +65,7 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
         }
         DataSerialization.serializeData(FILE_PATH, hotels);
         return element;
-    }
+    }/*/
 
     @Override
     public boolean remove(Hotel element) {
@@ -86,14 +87,23 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
     @Override
     public Hotel getByName(String name) {
-        return null;
+        List<Hotel> answer = new ArrayList<>();
+       answer = this.getAll().stream().filter(hotel -> hotel.getName().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toList());
+        if (answer.size() > 1) {
+            System.out.println("Hotels have copies.");
+        }
+        if (answer.size() == 0) {
+            return null;
+        } else
+            return answer.get(0);
     }
+
 
     @Override
     public List<Hotel> getByCity(String city) {
         List<Hotel> answer = new ArrayList<>();
         //TODO: String values are not comparing by `==`. Please use for that `equals()`.
-        getAll().forEach(x ->{if(x.getCity() == city) answer.add(x);});
+        getAll().forEach(x ->{if(x.getCity().equals(city) ) answer.add(x);});
         return answer;
     }
 
