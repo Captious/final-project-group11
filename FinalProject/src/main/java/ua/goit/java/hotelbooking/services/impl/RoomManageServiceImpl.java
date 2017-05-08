@@ -16,7 +16,7 @@ public class RoomManageServiceImpl implements RoomManageService {
 
     @Override
     public void add(Room element) {
-
+        roomDao.persist(element);
     }
 
     @Override
