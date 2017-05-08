@@ -6,6 +6,7 @@ import ua.goit.java.hotelbooking.model.Room;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
@@ -81,6 +82,11 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     @Override
     public Room getByHotel(String roomNumber, Long hotelId) {
-        return null;
+
+        List<Room> answer = new ArrayList<>();
+        getAll().forEach(room -> {if (room.getHotel().getId().equals(hotelId)&&room.getNumber().equals(roomNumber)) answer.add(room); } );
+
+        return answer.size() == 0 ? null : answer.get(0);
+
     }
 }
