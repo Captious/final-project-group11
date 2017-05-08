@@ -7,7 +7,11 @@ import ua.goit.java.hotelbooking.services.UserManageService;
 
 public class UserManageServiceImpl implements UserManageService{
 
-    private UserDao userDao = UserDaoImpl.getInstance();
+    private UserDao userDao;
+
+    public UserManageServiceImpl() {
+        this.userDao = UserDaoImpl.getInstance();
+    }
 
     @Override
     public void add(User element) {
