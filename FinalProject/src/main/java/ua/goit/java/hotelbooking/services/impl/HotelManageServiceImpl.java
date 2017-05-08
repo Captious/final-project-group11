@@ -48,10 +48,9 @@ public class HotelManageServiceImpl implements HotelManageService {
     @Override
     public void addRoom(Hotel hotel, Room room) {
         try {
-            //TODO: There need to persist room too.
-            roomDao.persist(room);
             room.setHotel(hotel);
-            hotel.getRooms().add(roomDao.persist(room));
+            roomDao.persist(room);
+            hotel.getRooms().add(room);
             hotelDao.persist(hotel);
         } catch (RuntimeException exception) {
             throw new RuntimeException(exception.getMessage());
