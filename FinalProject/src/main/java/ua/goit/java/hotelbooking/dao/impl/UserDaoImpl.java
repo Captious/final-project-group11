@@ -6,6 +6,7 @@ import ua.goit.java.hotelbooking.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class UserDaoImpl extends IdCollectionHolder implements UserDao {
 
@@ -38,7 +39,25 @@ public class UserDaoImpl extends IdCollectionHolder implements UserDao {
 
     @Override
     public User persist(User element) {
-        return null;
+        List<User> userList = getAll();
+        if (element.getId() == null){
+            increaseLastId();
+            element.setId(getLastId());
+            userList.add(element);
+        } else {
+            try {
+                int index = IntStream.range(0, userList.size())
+                        .filter(i -> element.getId().equals(userList.get(i).getId()))
+                        .findFirst()
+                        .getAsInt();
+                userList.set(index, element);
+            } catch (RuntimeException exception) {
+                throw new RuntimeException(String.format("There is no element with that ID (%d) in the database %s",
+                        element.getId(), ENTITY));
+            }
+        }
+        DataSerialization.serializeData(FILE_PATH, userList);
+        return element;
     }
 
     @Override
