@@ -1,11 +1,10 @@
 package ua.goit.java.hotelbooking.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hotel implements Serializable {
-    private Long id;
+public class Hotel extends BaseModel {
+    private static final long serialVersionUID = 550151019702604957L;
     private String name;
     private String city;
     private List<Room> rooms;
@@ -44,14 +43,6 @@ public class Hotel implements Serializable {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override

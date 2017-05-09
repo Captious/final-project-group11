@@ -5,6 +5,8 @@ import ua.goit.java.hotelbooking.dao.impl.UserDaoImpl;
 import ua.goit.java.hotelbooking.model.User;
 import ua.goit.java.hotelbooking.services.UserManageService;
 
+import java.util.List;
+
 public class UserManageServiceImpl implements UserManageService{
 
     private UserDao userDao;
@@ -30,5 +32,10 @@ public class UserManageServiceImpl implements UserManageService{
     @Override
     public boolean remove(User user) {
         return userDao.remove(user);
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userDao.getAll();
     }
 }

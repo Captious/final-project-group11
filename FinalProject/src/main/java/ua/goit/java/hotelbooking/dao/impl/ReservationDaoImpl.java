@@ -7,11 +7,11 @@ import ua.goit.java.hotelbooking.model.Reservation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationDaoImpl extends IdCollectionHolder implements ReservationDao {
+public class ReservationDaoImpl extends BaseDaoImpl<Reservation> implements ReservationDao {
 
     private static final String FILE_PATH =
             String.format("%s/src/main/java/ua/goit/java/hotelbooking/data/reservation.txt",
-            System.getProperty("user.dir"));
+                    System.getProperty("user.dir"));
     private static final String ENTITY = "Reservation";
     private static Long lastId;
 
@@ -24,24 +24,29 @@ public class ReservationDaoImpl extends IdCollectionHolder implements Reservatio
         private final static ReservationDaoImpl INSTANCE = new ReservationDaoImpl();
     }
 
-    public static ReservationDaoImpl getInstance(){
-        return  ReservationHolder.INSTANCE;
+    public static ReservationDaoImpl getInstance() {
+        return ReservationHolder.INSTANCE;
     }
 
-    private Long getLastId() {
+    @Override
+    protected Long getLastId() {
         return lastId;
     }
 
-    private void increaseLastId() {
-        lastId++;
-        getLastIdCollection().put(ENTITY, lastId);
-        setLastIdCollection(getLastIdCollection());
+    @Override
+    protected String getEntityName() {
+        return ENTITY;
+    }
+
+    @Override
+    protected String getFilePath() {
+        return FILE_PATH;
     }
 
     @Override
     public Reservation persist(Reservation element) {
         List<Reservation> reservation = getAll();
-        if (element.getId() != null){
+        if (element.getId() != null) {
             throw new RuntimeException(String.format("This reservation already exists in the database %s", ENTITY));
         } else {
             increaseLastId();
@@ -50,19 +55,6 @@ public class ReservationDaoImpl extends IdCollectionHolder implements Reservatio
         }
         DataSerialization.serializeData(FILE_PATH, reservation);
         return element;
-    }
-
-    @Override
-    public boolean remove(Reservation element) {
-        List<Reservation> reservation = getAll();
-        if (element.getId() == null){
-            throw new RuntimeException(String.format("There is no such element in the database %s", ENTITY));
-        }
-        if (reservation.removeIf(r -> r.getId().equals(element.getId()))){
-            DataSerialization.serializeData(FILE_PATH, reservation);
-            return true;
-        }
-        return false;
     }
 
     @Override

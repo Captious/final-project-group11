@@ -66,7 +66,7 @@ public class HotelManageServiceImpl implements HotelManageService {
     @Override
     public boolean removeRoom(Hotel hotel, Room room) {
         List<Hotel> hotels = hotelDao.getAll();
-        try{
+        try {
             Hotel hotelUpdate = hotels.stream()
                     .filter(h -> h.getId().equals(hotel.getId()) && h.equals(hotel)).findFirst().get();
             if (hotelUpdate.getRooms().removeIf(r -> r.getId().equals(room.getId()))) {
@@ -78,5 +78,10 @@ public class HotelManageServiceImpl implements HotelManageService {
             return false;
         }
         return false;
+    }
+
+    @Override
+    public List<Hotel> getAll() {
+        return hotelDao.getAll();
     }
 }

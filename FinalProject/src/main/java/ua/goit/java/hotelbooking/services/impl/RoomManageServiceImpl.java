@@ -6,6 +6,8 @@ import ua.goit.java.hotelbooking.model.Hotel;
 import ua.goit.java.hotelbooking.model.Room;
 import ua.goit.java.hotelbooking.services.RoomManageService;
 
+import java.util.List;
+
 public class RoomManageServiceImpl implements RoomManageService {
 
     private RoomDao roomDao;
@@ -25,17 +27,22 @@ public class RoomManageServiceImpl implements RoomManageService {
 
     @Override
     public Room edit(Room element) {
-            return roomDao.persist(element);
+        return roomDao.persist(element);
     }
 
     @Override
     public Room findByHotel(Room room, Hotel hotel) {
-        return roomDao.getByHotel(room.getNumber(),hotel.getId());
+        return roomDao.getByHotel(room.getNumber(), hotel.getId());
     }
 
     @Override
     public boolean remove(Room element) {
         return roomDao.remove(element);
+    }
+
+    @Override
+    public List<Room> getAll() {
+        return roomDao.getAll();
     }
 }
 

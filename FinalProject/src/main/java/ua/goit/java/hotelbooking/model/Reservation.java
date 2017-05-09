@@ -1,10 +1,9 @@
 package ua.goit.java.hotelbooking.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Reservation implements Serializable {
-    private Long id;
+public class Reservation extends BaseModel {
+    private static final long serialVersionUID = 5856911273056449679L;
     private Room room;
     private Date reservationDate;
     private User user;
@@ -42,14 +41,6 @@ public class Reservation implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
+public class RoomDaoImpl extends BaseDaoImpl<Room> implements RoomDao {
 
     private static final String FILE_PATH =
             String.format("%s/src/main/java/ua/goit/java/hotelbooking/data/room.txt",
@@ -30,51 +30,26 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
         return  RoomHolder.INSTANCE;
     }
 
-    private Long getLastId() {
+    @Override
+    protected Long getLastId() {
         return lastId;
     }
 
-    private void increaseLastId() {
+    @Override
+    protected String getEntityName() {
+        return ENTITY;
+    }
+
+    @Override
+    protected String getFilePath() {
+        return FILE_PATH;
+    }
+
+    @Override
+    protected void increaseLastId() {
         lastId++;
         getLastIdCollection().put(ENTITY, lastId);
         setLastIdCollection(getLastIdCollection());
-    }
-
-    @Override
-    public Room persist(Room element) {
-        List<Room> rooms = getAll();
-        if (element.getId() == null){
-            increaseLastId();
-            element.setId(getLastId());
-            rooms.add(element);
-        } else {
-            try {
-                int index = IntStream.range(0, rooms.size())
-                        .filter(i -> element.getId().equals(rooms.get(i).getId()))
-                        .findFirst()
-                        .getAsInt();
-                rooms.set(index, element);
-            } catch (RuntimeException exception) {
-                throw new RuntimeException(String.format("There is no element with that ID (%d) in the database %s",
-                        element.getId(), ENTITY));
-            }
-        }
-        DataSerialization.serializeData(FILE_PATH, rooms);
-        return element;
-    }
-
-    @Override
-    public boolean remove(Room element) {
-        List<Room> rooms = getAll();
-        Long id = element.getId();
-        if(id == null){
-            throw new RuntimeException("There is no such room in database");
-        }
-        if((rooms.removeIf(x -> x.getId().equals(id)))) {
-            DataSerialization.serializeData(FILE_PATH, rooms);
-            return true;
-        }
-        return false;
     }
 
     @Override

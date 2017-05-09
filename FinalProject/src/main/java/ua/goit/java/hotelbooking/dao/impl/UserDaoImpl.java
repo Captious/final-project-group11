@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class UserDaoImpl extends IdCollectionHolder implements UserDao {
+public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 
     private static final String FILE_PATH =
             String.format("%s/src/main/java/ua/goit/java/hotelbooking/data/user.txt",
-            System.getProperty("user.dir"));
+                    System.getProperty("user.dir"));
     private static final String ENTITY = "User";
     private static Long lastId;
 
@@ -25,55 +25,30 @@ public class UserDaoImpl extends IdCollectionHolder implements UserDao {
         private final static UserDaoImpl INSTANCE = new UserDaoImpl();
     }
 
-    public static UserDaoImpl getInstance(){
-        return  UserHolder.INSTANCE;
+    public static UserDaoImpl getInstance() {
+        return UserHolder.INSTANCE;
     }
 
-    private Long getLastId() {
+    @Override
+    protected Long getLastId() {
         return lastId;
     }
 
-    private void increaseLastId(){
+    @Override
+    protected String getEntityName() {
+        return ENTITY;
+    }
+
+    @Override
+    protected String getFilePath() {
+        return FILE_PATH;
+    }
+
+    @Override
+    protected void increaseLastId() {
         lastId++;
         getLastIdCollection().put(ENTITY, lastId);
         setLastIdCollection(getLastIdCollection());
-    }
-
-    @Override
-    public User persist(User element) {
-        List<User> userList = getAll();
-        if (element.getId() == null){
-            increaseLastId();
-            element.setId(getLastId());
-            userList.add(element);
-        } else {
-            try {
-                int index = IntStream.range(0, userList.size())
-                        .filter(i -> element.getId().equals(userList.get(i).getId()))
-                        .findFirst()
-                        .getAsInt();
-                userList.set(index, element);
-            } catch (RuntimeException exception) {
-                throw new RuntimeException(String.format("There is no element with that ID (%d) in the database %s",
-                        element.getId(), ENTITY));
-            }
-        }
-        DataSerialization.serializeData(FILE_PATH, userList);
-        return element;
-    }
-
-    @Override
-    public boolean remove(User element) {
-        List<User> users = getAll();
-        Long id = element.getId();
-        if(id == null){
-            throw new RuntimeException("There is no such user in database");
-        }
-        if((users.removeIf(x -> x.getId().equals(id)))) {
-            DataSerialization.serializeData(FILE_PATH, users);
-            return true;
-        }
-        return false;
     }
 
     @Override

@@ -8,6 +8,7 @@ import ua.goit.java.hotelbooking.model.User;
 import ua.goit.java.hotelbooking.services.ReservationService;
 
 import java.util.Date;
+import java.util.List;
 
 public class ReservationServiceImpl implements ReservationService {
 
@@ -29,5 +30,10 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public boolean remove(Reservation reservation) {
         return reservationDao.remove(reservation);
+    }
+
+    @Override
+    public List<Reservation> getAll() {
+        return reservationDao.getAll();
     }
 }
