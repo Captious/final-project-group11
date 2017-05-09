@@ -47,13 +47,11 @@ public class HotelManageServiceImpl implements HotelManageService {
 
     @Override
     public void addRoom(Hotel hotel, Room room) {
-        try {
+        if (!hotel.getRooms().contains(room)) {
             room.setHotel(hotel);
             roomDao.persist(room);
             hotel.getRooms().add(room);
             hotelDao.persist(hotel);
-        } catch (RuntimeException exception) {
-            throw new RuntimeException(exception.getMessage());
         }
     }
 
