@@ -17,6 +17,10 @@ public class ReservationServiceImpl implements ReservationService {
         this.reservationDao = ReservationDaoImpl.getInstance();
     }
 
+    public ReservationDao getReservationDao() {
+        return reservationDao;
+    }
+
     @Override
     public void add(Room room, Date date, User user) {
         this.reservationDao.persist(new Reservation(room, date, user));

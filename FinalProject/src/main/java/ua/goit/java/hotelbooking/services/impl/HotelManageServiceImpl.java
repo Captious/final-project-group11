@@ -20,6 +20,14 @@ public class HotelManageServiceImpl implements HotelManageService {
         this.roomDao = RoomDaoImpl.getInstance();
     }
 
+    public HotelDao getHotelDao() {
+        return hotelDao;
+    }
+
+    public RoomDao getRoomDao() {
+        return roomDao;
+    }
+
     @Override
     public void add(Hotel element) {
         hotelDao.persist(element);

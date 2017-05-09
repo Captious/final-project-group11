@@ -13,6 +13,10 @@ public class UserManageServiceImpl implements UserManageService{
         this.userDao = UserDaoImpl.getInstance();
     }
 
+    public UserDao getUserDao() {
+        return userDao;
+    }
+
     @Override
     public void add(User element) {
         userDao.persist(element);
