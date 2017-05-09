@@ -43,6 +43,9 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
         List<Hotel> hotels = getAll();
         Long elementID = element.getId();
         if (elementID == null){
+            if (hotels.stream().anyMatch(h -> h.getName().toLowerCase().equals(element.getName().toLowerCase()))) {
+                throw new RuntimeException("The hotel with the same name exists in the database");
+            }
             this.increaseLastId();
             element.setId(this.lastId);
             hotels.add(element);
@@ -86,8 +89,10 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
     @Override
     public Hotel getByName(String name) {
-        List<Hotel> answer = new ArrayList<>();
-       answer = this.getAll().stream().filter(hotel -> hotel.getName().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toList());
+        List<Hotel> answer;
+        answer = this.getAll().stream()
+                .filter(hotel -> hotel.getName().toLowerCase().contains(name.toLowerCase()))
+                .collect(Collectors.toList());
         if (answer.size() > 1) {
             System.out.println("Hotels have copies.");
         }
@@ -97,13 +102,10 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
             return answer.get(0);
     }
 
-
     @Override
     public List<Hotel> getByCity(String city) {
         List<Hotel> answer = new ArrayList<>();
-        //TODO: String values are not comparing by `==`. Please use for that `equals()`.
         getAll().forEach(x ->{if(x.getCity().equals(city) ) answer.add(x);});
         return answer;
     }
-
 }
