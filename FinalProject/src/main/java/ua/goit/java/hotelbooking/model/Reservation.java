@@ -69,4 +69,12 @@ public class Reservation implements Serializable {
         result = 31 * result + getReservationDate().hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return String.format("hotel: %-15s room: %-5s date: %td-%tm-%tY  user: %-30s ",
+                this.getRoom().getHotel().getName(), this.getRoom().getNumber(),
+                this.getReservationDate(), this.getReservationDate(), this.getReservationDate(),
+                this.getUser().getFio());
+    }
 }

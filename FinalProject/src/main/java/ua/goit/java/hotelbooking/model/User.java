@@ -33,11 +33,16 @@ public class User implements Serializable {
 
         User user = (User) o;
 
-        return getFio().equals(user.getFio());
+        return getFio().toLowerCase().equals(user.getFio().toLowerCase());
     }
 
     @Override
     public int hashCode() {
         return getFio().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("fio: %s", getFio());
     }
 }

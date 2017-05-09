@@ -61,8 +61,8 @@ public class Hotel implements Serializable {
 
         Hotel hotel = (Hotel) o;
 
-        if (!getName().equals(hotel.getName())) return false;
-        return getCity().equals(hotel.getCity());
+        if (!getName().toLowerCase().equals(hotel.getName().toLowerCase())) return false;
+        return getCity().toLowerCase().equals(hotel.getCity().toLowerCase());
     }
 
     @Override
@@ -70,5 +70,10 @@ public class Hotel implements Serializable {
         int result = getName().hashCode();
         result = 31 * result + getCity().hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("hotel: %-15s city: %-15s rooms amount: %d", getName(), getCity(), getRooms().size());
     }
 }

@@ -43,7 +43,7 @@ public class Room implements Serializable {
 
         Room room = (Room) o;
 
-        if (!getNumber().equals(room.getNumber())) return false;
+        if (!getNumber().toLowerCase().equals(room.getNumber().toLowerCase())) return false;
         return getHotel().equals(room.getHotel());
     }
 
@@ -52,5 +52,10 @@ public class Room implements Serializable {
         int result = getNumber().hashCode();
         result = 31 * result + getHotel().hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("room number: %-10s  hotel: %s", getNumber(), getHotel().getName());
     }
 }
