@@ -42,7 +42,7 @@ public class HotelManageServiceImpl implements HotelManageService {
 
     @Override
     public List<Hotel> findByCity(String cityName) {
-        return null;
+        return hotelDao.getByCity(cityName);
     }
 
     @Override

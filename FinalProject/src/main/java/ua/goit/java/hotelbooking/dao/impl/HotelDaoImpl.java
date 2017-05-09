@@ -105,7 +105,7 @@ public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
     @Override
     public List<Hotel> getByCity(String city) {
         List<Hotel> answer = new ArrayList<>();
-        getAll().forEach(x ->{if(x.getCity().equals(city) ) answer.add(x);});
+        getAll().forEach(x ->{if(x.getCity().toLowerCase().equals(city.toLowerCase())) answer.add(x);});
         return answer;
     }
 }
