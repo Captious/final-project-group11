@@ -10,9 +10,7 @@ import java.util.stream.Collectors;
 
 public class HotelDaoImpl extends IdCollectionHolder implements HotelDao {
 
-    private static final String FILE_PATH =
-            String.format("%s/src/main/java/ua/goit/java/hotelbooking/data/hotel.txt",
-            System.getProperty("user.dir"));
+    private static final String FILE_PATH = "src/main/java/ua/goit/java/hotelbooking/data/hotel.txt";
     private static final String ENTITY = "Hotel";
     private static Long lastId;
 

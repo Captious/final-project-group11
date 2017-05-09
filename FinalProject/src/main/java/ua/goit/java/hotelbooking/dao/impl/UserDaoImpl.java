@@ -10,9 +10,7 @@ import java.util.stream.IntStream;
 
 public class UserDaoImpl extends IdCollectionHolder implements UserDao {
 
-    private static final String FILE_PATH =
-            String.format("%s/src/main/java/ua/goit/java/hotelbooking/data/user.txt",
-            System.getProperty("user.dir"));
+    private static final String FILE_PATH ="src/main/java/ua/goit/java/hotelbooking/data/user.txt";
     private static final String ENTITY = "User";
     private static Long lastId;
 
