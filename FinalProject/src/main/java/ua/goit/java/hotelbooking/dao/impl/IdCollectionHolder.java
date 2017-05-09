@@ -7,7 +7,7 @@ import java.util.Map;
 public abstract class IdCollectionHolder {
 
     private static final String LAST_ID_PATH =
-            String.format("%s/FinalProject/src/main/java/ua/goit/java/hotelbooking/data/id.txt",
+            String.format("%s/src/main/java/ua/goit/java/hotelbooking/data/id.txt",
                     System.getProperty("user.dir"));
     private static Map<String, Long> lastIdCollection;
 

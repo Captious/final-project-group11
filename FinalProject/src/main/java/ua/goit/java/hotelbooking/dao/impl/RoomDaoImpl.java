@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     private static final String FILE_PATH =
-            String.format("%s/FinalProject/src/main/java/ua/goit/java/hotelbooking/data/room.txt",
+            String.format("%s/src/main/java/ua/goit/java/hotelbooking/data/room.txt",
             System.getProperty("user.dir"));
     private static final String ENTITY = "Room";
     private static Long lastId;

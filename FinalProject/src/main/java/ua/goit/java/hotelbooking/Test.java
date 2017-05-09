@@ -4,16 +4,11 @@ import ua.goit.java.hotelbooking.model.Hotel;
 import ua.goit.java.hotelbooking.model.Reservation;
 import ua.goit.java.hotelbooking.model.Room;
 import ua.goit.java.hotelbooking.model.User;
-import ua.goit.java.hotelbooking.services.HotelManageService;
-import ua.goit.java.hotelbooking.services.ReservationService;
-import ua.goit.java.hotelbooking.services.RoomManageService;
-import ua.goit.java.hotelbooking.services.UserManageService;
 import ua.goit.java.hotelbooking.services.impl.HotelManageServiceImpl;
 import ua.goit.java.hotelbooking.services.impl.ReservationServiceImpl;
 import ua.goit.java.hotelbooking.services.impl.RoomManageServiceImpl;
 import ua.goit.java.hotelbooking.services.impl.UserManageServiceImpl;
 
-import java.io.File;
 import java.util.List;
 
 public class Test {
