@@ -13,6 +13,7 @@ import ua.goit.java.hotelbooking.services.impl.ReservationServiceImpl;
 import ua.goit.java.hotelbooking.services.impl.RoomManageServiceImpl;
 import ua.goit.java.hotelbooking.services.impl.UserManageServiceImpl;
 
+import java.io.File;
 import java.util.List;
 
 public class Test {
@@ -44,7 +45,6 @@ public class Test {
             System.out.printf("\nid: %-5d  %s", reservation.getId(), reservation);
         }
         System.out.println();
-
 
     }
 }

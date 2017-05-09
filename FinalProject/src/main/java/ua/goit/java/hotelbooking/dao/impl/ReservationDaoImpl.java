@@ -9,7 +9,9 @@ import java.util.List;
 
 public class ReservationDaoImpl extends IdCollectionHolder implements ReservationDao {
 
-    private static final String FILE_PATH = "FinalProject/src/main/java/ua/goit/java/hotelbooking/data/reservation.txt";
+    private static final String FILE_PATH =
+            String.format("%s/FinalProject/src/main/java/ua/goit/java/hotelbooking/data/reservation.txt",
+            System.getProperty("user.dir"));
     private static final String ENTITY = "Reservation";
     private static Long lastId;
 
