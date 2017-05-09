@@ -32,7 +32,7 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
         return lastId;
     }
 
-    private void increaseLastId(){
+    private void increaseLastId() {
         lastId++;
         getLastIdCollection().put(ENTITY, lastId);
         setLastIdCollection(getLastIdCollection());
@@ -66,7 +66,7 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
         List<Room> rooms = getAll();
         Long id = element.getId();
         if(id == null){
-            throw new RuntimeException("There is no such hotel in database");
+            throw new RuntimeException("There is no such room in database");
         }
         if((rooms.removeIf(x -> x.getId().equals(id)))) {
             DataSerialization.serializeData(FILE_PATH, rooms);
@@ -82,11 +82,9 @@ public class RoomDaoImpl extends IdCollectionHolder implements RoomDao {
 
     @Override
     public Room getByHotel(String roomNumber, Long hotelId) {
-
         List<Room> answer = new ArrayList<>();
-        getAll().forEach(room -> {if (room.getHotel().getId().equals(hotelId)&&room.getNumber().equals(roomNumber)) answer.add(room); } );
-
+        getAll().forEach(room -> {if (room.getHotel().getId().equals(hotelId)
+                &&room.getNumber().equals(roomNumber)) answer.add(room); });
         return answer.size() == 0 ? null : answer.get(0);
-
     }
 }

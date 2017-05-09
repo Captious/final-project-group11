@@ -19,20 +19,11 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public void add(Room room, Date date, User user) {
-        Reservation reservation = new Reservation(room, date, user);
-        try {
-            reservationDao.persist(reservation);
-        } catch (RuntimeException exception) {
-            throw new RuntimeException(exception.getMessage());
-        }
+        this.reservationDao.persist(new Reservation(room, date, user));
     }
 
     @Override
     public boolean remove(Reservation reservation) {
-        try {
-            return reservationDao.remove(reservation);
-        } catch (RuntimeException exception) {
-            throw new RuntimeException(exception.getMessage());
-        }
+        return reservationDao.remove(reservation);
     }
 }

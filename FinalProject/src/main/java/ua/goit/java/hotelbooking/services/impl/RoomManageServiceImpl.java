@@ -21,11 +21,7 @@ public class RoomManageServiceImpl implements RoomManageService {
 
     @Override
     public Room edit(Room element) {
-        try {
             return roomDao.persist(element);
-        } catch (RuntimeException exception) {
-            throw new RuntimeException(exception.getMessage());
-        }
     }
 
     @Override
@@ -33,7 +29,7 @@ public class RoomManageServiceImpl implements RoomManageService {
         return roomDao.getByHotel(room.getNumber(),hotel.getId());
     }
 
-
+    @Override
     public boolean remove(Room element) {
         return roomDao.remove(element);
     }

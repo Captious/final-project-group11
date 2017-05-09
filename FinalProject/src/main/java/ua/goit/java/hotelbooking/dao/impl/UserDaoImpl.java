@@ -65,7 +65,7 @@ public class UserDaoImpl extends IdCollectionHolder implements UserDao {
         List<User> users = getAll();
         Long id = element.getId();
         if(id == null){
-            throw new RuntimeException("There is no such hotel in database");
+            throw new RuntimeException("There is no such user in database");
         }
         if((users.removeIf(x -> x.getId().equals(id)))) {
             DataSerialization.serializeData(FILE_PATH, users);
