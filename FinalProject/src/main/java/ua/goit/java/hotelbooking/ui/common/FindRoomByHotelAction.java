@@ -9,7 +9,7 @@ public class FindRoomByHotelAction extends AbstractRoomAction {
         System.out.println("Select hotel:");
         Hotel hotel = commandLine.choose(hotelManageService.getAll());
         System.out.println("Input room number:");
-        String roomNumber = scanner.nextLine();
+        String roomNumber = getValidString();
         Room room = new Room(roomNumber);
         Room foundRoom = roomManageService.findByHotel(room, hotel);
         if(foundRoom != null) {

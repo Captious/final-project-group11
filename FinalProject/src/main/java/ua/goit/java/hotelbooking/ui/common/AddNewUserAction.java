@@ -6,7 +6,7 @@ public class AddNewUserAction extends AbstractUserAction {
     @Override
     public void execute(CommandLine commandLine) {
         System.out.println("Input user name and surname.");
-        String userNameAndSurname = scanner.nextLine();
+        String userNameAndSurname = getValidString();
         User user = new User(userNameAndSurname);
         userManageService.add(user);
     }

@@ -20,7 +20,7 @@ public class EditRoomAction extends AbstractHotelAction {
         System.out.println("Select room:");
         Room room = commandLine.choose(hotel.getRooms());
         System.out.println("Input new room number:");
-        String roomNumber = scanner.nextLine();
+        String roomNumber = getValidString();
         room.setNumber(roomNumber);
         roomManageService.edit(room);
     }

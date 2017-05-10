@@ -7,9 +7,9 @@ public class AddNewHotelAction extends AbstractHotelAction {
     @Override
     public void execute(CommandLine commandLine) {
         System.out.println("Input hotel name:");
-        String hotelName = scanner.nextLine();
+        String hotelName = getValidString();
         System.out.println("Input hotel city:");
-        String hotelCity = scanner.nextLine();
+        String hotelCity = getValidString();
         Hotel hotel = new Hotel(hotelName, hotelCity);
         hotelManageService.add(hotel);
     }

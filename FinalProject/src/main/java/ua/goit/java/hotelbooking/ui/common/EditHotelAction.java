@@ -8,9 +8,9 @@ public class EditHotelAction extends AbstractHotelAction {
         System.out.println("Select hotel:");
         Hotel hotel = commandLine.choose(hotelManageService.getAll());
         System.out.println("Input new hotel name:");
-        String hotelName = scanner.nextLine();
+        String hotelName = getValidString();
         System.out.println("Input new hotel city:");
-        String hotelCity = scanner.nextLine();
+        String hotelCity = getValidString();
         hotel.setName(hotelName);
         hotel.setCity(hotelCity);
         hotelManageService.edit(hotel);

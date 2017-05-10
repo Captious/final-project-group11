@@ -9,7 +9,7 @@ public class AddNewRoomAction extends AbstractHotelAction {
         System.out.println("Select hotel.");
         Hotel hotel = commandLine.choose(hotelManageService.getAll());
         System.out.println("Input room number.");
-        String roomNumber = scanner.nextLine();
+        String roomNumber = getValidString();
         Room room = new Room(roomNumber, hotel);
         hotelManageService.addRoom(hotel, room);
     }

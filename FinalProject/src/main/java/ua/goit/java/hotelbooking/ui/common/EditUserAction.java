@@ -8,7 +8,7 @@ public class EditUserAction extends AbstractUserAction {
         System.out.println("Select user:");
         User user = commandLine.choose(userManageService.getAll());
         System.out.println("Input user name and surname:");
-        String userNameAndSurname = scanner.nextLine();
+        String userNameAndSurname = getValidString();
         user.setFio(userNameAndSurname);
         userManageService.edit(user);
     }
