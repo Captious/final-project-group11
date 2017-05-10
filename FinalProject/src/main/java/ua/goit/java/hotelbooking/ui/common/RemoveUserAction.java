@@ -12,6 +12,6 @@ public class RemoveUserAction extends AbstractUserAction {
 
     @Override
     public String toString() {
-        return "Remove room.";
+        return "Remove user.";
     }
 }
