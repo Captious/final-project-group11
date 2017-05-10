@@ -1,26 +1,25 @@
 package ua.goit.java.hotelbooking.data.prepared.data;
 
-import ua.goit.java.hotelbooking.dao.HotelDao;
-import ua.goit.java.hotelbooking.dao.ReservationDao;
-import ua.goit.java.hotelbooking.dao.RoomDao;
-import ua.goit.java.hotelbooking.dao.UserDao;
+import ua.goit.java.hotelbooking.dao.*;
 import ua.goit.java.hotelbooking.dao.impl.HotelDaoImpl;
 import ua.goit.java.hotelbooking.dao.impl.ReservationDaoImpl;
 import ua.goit.java.hotelbooking.dao.impl.RoomDaoImpl;
 import ua.goit.java.hotelbooking.dao.impl.UserDaoImpl;
+import ua.goit.java.hotelbooking.dao.utils.DataSerialization;
 import ua.goit.java.hotelbooking.model.Hotel;
 import ua.goit.java.hotelbooking.model.Reservation;
 import ua.goit.java.hotelbooking.model.Room;
 import ua.goit.java.hotelbooking.model.User;
+import ua.goit.java.hotelbooking.services.HotelManageService;
+import ua.goit.java.hotelbooking.services.impl.HotelManageServiceImpl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Materials {
 
+    private Map<String, Long> ids;
     private List<Hotel> hotels;
     private List<Room> rooms;
     private List<User> users;
@@ -31,6 +30,11 @@ public class Materials {
         rooms = new ArrayList<>();
         users = new ArrayList<>();
         reservations = new ArrayList<>();
+        ids = new HashMap<>();
+        ids.put("Hotel", new Long(0));
+        ids.put("Room", new Long(0));
+        ids.put("User", new Long(0));
+        ids.put("Reservation", new Long(0));
     }
 
     private void setHotels() {
@@ -121,10 +125,16 @@ public class Materials {
     }
 
     public void writePreparedData() {
+        DataSerialization.serializeData("src/main/java/ua/goit/java/hotelbooking/data/id.txt", ids);
+        DataSerialization.serializeData("src/main/java/ua/goit/java/hotelbooking/data/hotel.txt", hotels);
+        DataSerialization.serializeData("src/main/java/ua/goit/java/hotelbooking/data/room.txt", rooms);
+        DataSerialization.serializeData("src/main/java/ua/goit/java/hotelbooking/data/user.txt", users);
+        DataSerialization.serializeData("src/main/java/ua/goit/java/hotelbooking/data/reservation.txt", reservations);
         HotelDao hotelDao = HotelDaoImpl.getInstance();
         RoomDao roomDao = RoomDaoImpl.getInstance();
         UserDao userDao = UserDaoImpl.getInstance();
         ReservationDao reservationDao = ReservationDaoImpl.getInstance();
+
         this.setHotels();
         this.setRooms();
         this.setUsers();
@@ -144,6 +154,17 @@ public class Materials {
         }
         for (Reservation reservation: reservations) {
             reservationDao.persist(reservation);
+        }
+    }
+
+    public void addRoomsToHotels(List<Hotel> hotels, List<Room> rooms) {
+        HotelManageService hotelManageService = new HotelManageServiceImpl();
+        try {
+            for (Room room : rooms) {
+                hotelManageService.addRoom(hotels.get(hotels.indexOf(room.getHotel())), room);
+            }
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

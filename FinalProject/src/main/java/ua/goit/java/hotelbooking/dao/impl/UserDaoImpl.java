@@ -14,11 +14,9 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
             String.format("%s/src/main/java/ua/goit/java/hotelbooking/data/user.txt",
                     System.getProperty("user.dir"));
     private static final String ENTITY = "User";
-    private static Long lastId;
 
     private UserDaoImpl() {
-        super();
-        lastId = getLastIdCollection().get(ENTITY);
+        super(ENTITY);
     }
 
     private static class UserHolder {
@@ -30,11 +28,6 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
     }
 
     @Override
-    protected Long getLastId() {
-        return lastId;
-    }
-
-    @Override
     protected String getEntityName() {
         return ENTITY;
     }
@@ -42,13 +35,6 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
     @Override
     protected String getFilePath() {
         return FILE_PATH;
-    }
-
-    @Override
-    protected void increaseLastId() {
-        lastId++;
-        getLastIdCollection().put(ENTITY, lastId);
-        setLastIdCollection(getLastIdCollection());
     }
 
     @Override

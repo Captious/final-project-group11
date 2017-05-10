@@ -11,14 +11,12 @@ import java.util.stream.Collectors;
 public class HotelDaoImpl extends BaseDaoImpl<Hotel> implements HotelDao {
 
     private static final String FILE_PATH =
-            String.format("src/main/java/ua/goit/java/hotelbooking/data/hotel.txt",
+            String.format("%s/src/main/java/ua/goit/java/hotelbooking/data/hotel.txt",
                     System.getProperty("user.dir"));
     private static final String ENTITY = "Hotel";
-    private static Long lastId;
 
     private HotelDaoImpl() {
-        super();
-        lastId = getLastIdCollection().get(ENTITY);
+        super(ENTITY);
     }
 
     private static class HotelHolder {
@@ -27,11 +25,6 @@ public class HotelDaoImpl extends BaseDaoImpl<Hotel> implements HotelDao {
 
     public static HotelDaoImpl getInstance() {
         return HotelHolder.INSTANCE;
-    }
-
-    @Override
-    protected Long getLastId() {
-        return lastId;
     }
 
     @Override

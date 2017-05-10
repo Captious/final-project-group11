@@ -9,6 +9,12 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public abstract class BaseDaoImpl<T extends BaseModel> extends IdCollectionHolder implements BaseDao<T> {
+    private Long lastId;
+
+    public BaseDaoImpl(String entity) {
+        lastId = getLastIdCollection().get(entity);
+    }
+
     @Override
     public T persist(T element) {
         List<T> entityList = getAll();
@@ -47,12 +53,14 @@ public abstract class BaseDaoImpl<T extends BaseModel> extends IdCollectionHolde
     }
 
     protected void increaseLastId() {
-        Long lastId = getLastId() + 1;
+        lastId++;
         getLastIdCollection().put(getEntityName(), lastId);
         setLastIdCollection(getLastIdCollection());
     }
 
-    protected abstract Long getLastId();
+    protected Long getLastId() {
+        return this.lastId;
+    }
 
     protected abstract String getEntityName();
 

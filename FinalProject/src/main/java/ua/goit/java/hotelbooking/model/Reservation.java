@@ -63,7 +63,7 @@ public class Reservation extends BaseModel {
 
     @Override
     public String toString() {
-        return String.format("hotel: %-15s room: %-5s date: %td-%tm-%tY  user: %-30s ",
+        return String.format("hotel: %-13s room: %-5s date: %td-%tm-%tY  user: %-30s ",
                 this.getRoom().getHotel().getName(), this.getRoom().getNumber(),
                 this.getReservationDate(), this.getReservationDate(), this.getReservationDate(),
                 this.getUser().getFio());

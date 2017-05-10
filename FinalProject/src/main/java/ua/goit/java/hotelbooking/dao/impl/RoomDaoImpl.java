@@ -15,11 +15,9 @@ public class RoomDaoImpl extends BaseDaoImpl<Room> implements RoomDao {
             String.format("%s/src/main/java/ua/goit/java/hotelbooking/data/room.txt",
             System.getProperty("user.dir"));
     private static final String ENTITY = "Room";
-    private static Long lastId;
 
     private RoomDaoImpl() {
-        super();
-        lastId = getLastIdCollection().get(ENTITY);
+        super(ENTITY);
     }
 
     private static class RoomHolder {
@@ -31,11 +29,6 @@ public class RoomDaoImpl extends BaseDaoImpl<Room> implements RoomDao {
     }
 
     @Override
-    protected Long getLastId() {
-        return lastId;
-    }
-
-    @Override
     protected String getEntityName() {
         return ENTITY;
     }
@@ -43,13 +36,6 @@ public class RoomDaoImpl extends BaseDaoImpl<Room> implements RoomDao {
     @Override
     protected String getFilePath() {
         return FILE_PATH;
-    }
-
-    @Override
-    protected void increaseLastId() {
-        lastId++;
-        getLastIdCollection().put(ENTITY, lastId);
-        setLastIdCollection(getLastIdCollection());
     }
 
     @Override

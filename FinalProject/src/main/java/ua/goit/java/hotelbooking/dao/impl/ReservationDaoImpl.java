@@ -13,11 +13,9 @@ public class ReservationDaoImpl extends BaseDaoImpl<Reservation> implements Rese
             String.format("%s/src/main/java/ua/goit/java/hotelbooking/data/reservation.txt",
                     System.getProperty("user.dir"));
     private static final String ENTITY = "Reservation";
-    private static Long lastId;
 
     private ReservationDaoImpl() {
-        super();
-        lastId = getLastIdCollection().get(ENTITY);
+        super(ENTITY);
     }
 
     private static class ReservationHolder {
@@ -26,11 +24,6 @@ public class ReservationDaoImpl extends BaseDaoImpl<Reservation> implements Rese
 
     public static ReservationDaoImpl getInstance() {
         return ReservationHolder.INSTANCE;
-    }
-
-    @Override
-    protected Long getLastId() {
-        return lastId;
     }
 
     @Override

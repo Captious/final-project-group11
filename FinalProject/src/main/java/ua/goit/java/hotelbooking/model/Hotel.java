@@ -65,6 +65,6 @@ public class Hotel extends BaseModel {
 
     @Override
     public String toString() {
-        return String.format("hotel: %-15s city: %-15s rooms amount: %d", getName(), getCity(), getRooms().size());
+        return String.format("hotel: %-13s city: %-13s rooms amount: %d", getName(), getCity(), getRooms().size());
     }
 }
