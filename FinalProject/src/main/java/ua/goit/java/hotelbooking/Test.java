@@ -54,5 +54,18 @@ public class Test {
             System.out.printf("\nid: %-5d  %s", reservation.getId(), reservation);
         }
         System.out.println();
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("All Hotels");
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        hotelManageService.getHotelDao().getAll().forEach(System.out::println);
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("All Hotels in Kiev");
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        hotelManageService.getHotelDao().getByCity("Kiev").forEach(System.out::println);
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("Hilton hotel");
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(hotelManageService.getHotelDao().getByName("Hilton"));
     }
+
 }
