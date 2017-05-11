@@ -24,6 +24,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public void add(Room room, Date date, User user) {
+        if (this.getAll().stream().anyMatch(r -> r.getRoom().equals(room)&&r.getReservationDate().equals(date))) {
+            throw new RuntimeException(String.format("On the date %s the room %s is already booked",date.toString(),room.toString()));
+        }
         this.reservationDao.persist(new Reservation(room, date, user));
     }
 
