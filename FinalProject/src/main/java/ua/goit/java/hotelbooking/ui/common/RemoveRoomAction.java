@@ -10,7 +10,11 @@ public class RemoveRoomAction extends AbstractHotelAction {
         Hotel hotel = commandLine.choose(hotelManageService.getAll());
         System.out.println("select room:");
         Room room = commandLine.choose(hotel.getRooms());
-        hotelManageService.removeRoom(hotel, room);
+        try {
+            hotelManageService.removeRoom(hotel, room);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

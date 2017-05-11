@@ -13,7 +13,11 @@ public class EditHotelAction extends AbstractHotelAction {
         String hotelCity = getValidString();
         hotel.setName(hotelName);
         hotel.setCity(hotelCity);
-        hotelManageService.edit(hotel);
+        try {
+            hotelManageService.edit(hotel);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

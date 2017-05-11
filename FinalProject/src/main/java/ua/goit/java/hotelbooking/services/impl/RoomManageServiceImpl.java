@@ -27,6 +27,9 @@ public class RoomManageServiceImpl implements RoomManageService {
 
     @Override
     public Room edit(Room element) {
+        if (roomDao.getAll().contains(element)) {
+            throw new RuntimeException("Such room exists in the database.");
+        }
         return roomDao.persist(element);
     }
 

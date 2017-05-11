@@ -7,7 +7,11 @@ public class RemoveReservationAction extends AbstractReservationAction {
     public void execute(CommandLine commandLine) {
         System.out.println("Select reservation:");
         Reservation reservation = commandLine.choose(reservationService.getAll());
-        reservationService.remove(reservation);
+        try {
+            reservationService.remove(reservation);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

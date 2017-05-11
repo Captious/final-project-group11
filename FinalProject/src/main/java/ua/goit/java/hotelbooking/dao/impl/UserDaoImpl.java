@@ -39,15 +39,6 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
     }
 
     @Override
-    public User persist(User element) {
-
-        if (this.getAll().stream().anyMatch(u -> u.getLogin().toLowerCase().equals(element.getLogin().toLowerCase()))) {
-            throw new RuntimeException("The user with the same login exists in the database");
-        }
-        return super.persist(element);
-    }
-
-    @Override
     public List<User> getAll() {
         return (ArrayList<User>) DataSerialization.deserializeData(FILE_PATH);
     }

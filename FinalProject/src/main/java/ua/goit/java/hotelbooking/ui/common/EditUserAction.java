@@ -10,7 +10,11 @@ public class EditUserAction extends AbstractUserAction {
         System.out.println("Input user name and surname:");
         String userNameAndSurname = getValidString();
         user.setFio(userNameAndSurname);
-        userManageService.edit(user);
+        try {
+            userManageService.edit(user);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

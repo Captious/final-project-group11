@@ -134,6 +134,7 @@ public class Materials {
         RoomDao roomDao = RoomDaoImpl.getInstance();
         UserDao userDao = UserDaoImpl.getInstance();
         ReservationDao reservationDao = ReservationDaoImpl.getInstance();
+        HotelManageService hotelManageService = new HotelManageServiceImpl();
 
         this.setHotels();
         this.setRooms();
@@ -146,8 +147,10 @@ public class Materials {
         for (Hotel hotel: hotels) {
             hotelDao.persist(hotel);
         }
+        List<Hotel> hotels = hotelDao.getAll();
         for (Room room: rooms) {
-            roomDao.persist(room);
+            hotelManageService.addRoom(hotels.stream().filter(h -> h.equals(room.getHotel()))
+                    .findFirst().get(), room);
         }
         for (User user: users) {
             userDao.persist(user);

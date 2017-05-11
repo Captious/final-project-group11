@@ -22,7 +22,11 @@ public class EditRoomAction extends AbstractHotelAction {
         System.out.println("Input new room number:");
         String roomNumber = getValidString();
         room.setNumber(roomNumber);
-        roomManageService.edit(room);
+        try {
+            roomManageService.edit(room);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

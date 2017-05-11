@@ -12,7 +12,7 @@ public abstract class BaseDaoImpl<T extends BaseModel> extends IdCollectionHolde
     private Long lastId;
 
     public BaseDaoImpl(String entity) {
-        lastId = getLastIdCollection().get(entity);
+        this.lastId = getLastIdCollection().get(entity);
     }
 
     @Override
@@ -20,7 +20,7 @@ public abstract class BaseDaoImpl<T extends BaseModel> extends IdCollectionHolde
         List<T> entityList = getAll();
         if (element.getId() == null) {
             if (entityList.contains(element)) {
-                throw new RuntimeException(String.format("This element already exists in the database %s",
+                throw new RuntimeException(String.format("The %s already exists in the database.\n",
                         getEntityName()));
             }
             increaseLastId();
@@ -57,8 +57,8 @@ public abstract class BaseDaoImpl<T extends BaseModel> extends IdCollectionHolde
     }
 
     protected void increaseLastId() {
-        lastId++;
-        getLastIdCollection().put(getEntityName(), lastId);
+        this.lastId++;
+        getLastIdCollection().put(getEntityName(), this.lastId);
         setLastIdCollection(getLastIdCollection());
     }
 

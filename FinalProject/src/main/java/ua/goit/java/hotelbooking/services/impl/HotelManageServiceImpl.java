@@ -35,6 +35,9 @@ public class HotelManageServiceImpl implements HotelManageService {
 
     @Override
     public Hotel edit(Hotel element) {
+        if (hotelDao.getAll().contains(element)) {
+            throw new RuntimeException("Such hotel exists in the database.");
+        }
         return hotelDao.persist(element);
     }
 
@@ -64,16 +67,12 @@ public class HotelManageServiceImpl implements HotelManageService {
     @Override
     public boolean removeRoom(Hotel hotel, Room room) {
         List<Hotel> hotels = hotelDao.getAll();
-        try {
-            Hotel hotelUpdate = hotels.stream()
-                    .filter(h -> h.getId().equals(hotel.getId()) && h.equals(hotel)).findFirst().get();
-            if (hotelUpdate.getRooms().removeIf(r -> r.getId().equals(room.getId()))) {
-                hotelDao.persist(hotelUpdate);
-                roomDao.remove(room);
-                return true;
-            }
-        } catch (RuntimeException exception) {
-            return false;
+        Hotel hotelUpdate = hotels.stream()
+                    .filter(h -> h.getId().equals(hotel.getId())).findFirst().get();
+        if (hotelUpdate.getRooms().removeIf(r -> r.getId().equals(room.getId()))) {
+            hotelDao.persist(hotelUpdate);
+            roomDao.remove(room);
+            return true;
         }
         return false;
     }

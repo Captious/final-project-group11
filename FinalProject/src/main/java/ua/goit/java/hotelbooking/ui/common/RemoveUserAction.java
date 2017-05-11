@@ -7,7 +7,11 @@ public class RemoveUserAction extends AbstractUserAction {
     public void execute(CommandLine commandLine) {
         System.out.println("Select user:");
         User user = commandLine.choose(userManageService.getAll());
-        userManageService.remove(user);
+        try {
+            userManageService.remove(user);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

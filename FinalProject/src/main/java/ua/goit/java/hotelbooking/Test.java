@@ -7,15 +7,12 @@ import ua.goit.java.hotelbooking.model.Room;
 import ua.goit.java.hotelbooking.model.User;
 import ua.goit.java.hotelbooking.services.impl.HotelManageServiceImpl;
 import ua.goit.java.hotelbooking.services.impl.ReservationServiceImpl;
-import ua.goit.java.hotelbooking.services.impl.RoomManageServiceImpl;
 import ua.goit.java.hotelbooking.services.impl.UserManageServiceImpl;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+//Этот класс только для тестирования записи/чтения данных и для записи исходных данных(сброса).
 public class Test {
 
     public static void main(String[] args) throws ParseException {
@@ -30,12 +27,9 @@ public class Test {
         UserManageServiceImpl userManageService = new UserManageServiceImpl();
         ReservationServiceImpl reservationService = new ReservationServiceImpl();
 
-        List<Room> rooms = hotelManageService.getRoomDao().getAll();
         List<Hotel> hotels = hotelManageService.getHotelDao().getAll();
         List<User> users = userManageService.getUserDao().getAll();
         List<Reservation> reservations = reservationService.getReservationDao().getAll();
-
-        materials.addRoomsToHotels(hotels, rooms);
 
         System.out.println("Prepared data in the database.");
         System.out.println("\nHotels with rooms:");
@@ -53,19 +47,5 @@ public class Test {
         for (Reservation reservation: reservations) {
             System.out.printf("\nid: %-5d  %s", reservation.getId(), reservation);
         }
-        System.out.println();
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("All Hotels");
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        hotelManageService.getHotelDao().getAll().forEach(System.out::println);
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("All Hotels in Kiev");
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        hotelManageService.getHotelDao().getByCity("Kiev").forEach(System.out::println);
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("Hilton hotel");
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println(hotelManageService.getHotelDao().getByName("Hilton"));
     }
-
 }

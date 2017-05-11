@@ -38,16 +38,6 @@ public class HotelDaoImpl extends BaseDaoImpl<Hotel> implements HotelDao {
     }
 
     @Override
-    public Hotel persist(Hotel element) {
-
-        if (this.getAll().stream().anyMatch(h -> h.getName().toLowerCase().equals(element.getName().toLowerCase()))) {
-            throw new RuntimeException("The hotel with the same name exists in the database");
-        }
-        return super.persist(element);
-
-    }
-
-    @Override
     public List<Hotel> getAll() {
         return (ArrayList<Hotel>) DataSerialization.deserializeData(FILE_PATH);
     }
