@@ -3,9 +3,11 @@ package ua.goit.java.hotelbooking.model;
 public class User extends BaseModel {
     private static final long serialVersionUID = 68369264134601000L;
     private String fio;
+    private String login;
 
-    public User(String fio) {
+    public User(String fio, String login) {
         this.fio = fio;
+        this.login = login;
     }
 
     public String getFio() {
@@ -16,6 +18,14 @@ public class User extends BaseModel {
         this.fio = fio;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -23,16 +33,16 @@ public class User extends BaseModel {
 
         User user = (User) o;
 
-        return getFio().toLowerCase().equals(user.getFio().toLowerCase());
+        return getLogin().toLowerCase().equals(user.getLogin().toLowerCase());
     }
 
     @Override
     public int hashCode() {
-        return getFio().hashCode();
+        return getLogin().hashCode();
     }
 
     @Override
     public String toString() {
-        return String.format("fio: %s", getFio());
+        return String.format("fio: %s\nlogin: %s", getFio(),getLogin());
     }
 }

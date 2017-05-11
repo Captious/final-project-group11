@@ -39,30 +39,12 @@ public class HotelDaoImpl extends BaseDaoImpl<Hotel> implements HotelDao {
 
     @Override
     public Hotel persist(Hotel element) {
-        List<Hotel> hotels = getAll();
-        Long elementID = element.getId();
-        if (elementID == null) {
-            if (hotels.stream().anyMatch(h -> h.getName().toLowerCase().equals(element.getName().toLowerCase()))) {
-                throw new RuntimeException("The hotel with the same name exists in the database");
-            }
-            increaseLastId();
-            element.setId(getLastId());
-            hotels.add(element);
-        } else {
-            boolean finding = false;
-            for (int i = 0; i < hotels.size(); i++) {
-                if (hotels.get(i).getId().equals(elementID)) {
-                    hotels.set(i, element);
-                    finding = true;
-                    break;
-                }
-            }
-            if (!finding) {
-                throw new RuntimeException("There is no such hotel in database");
-            }
+
+        if (this.getAll().stream().anyMatch(h -> h.getName().toLowerCase().equals(element.getName().toLowerCase()))) {
+            throw new RuntimeException("The hotel with the same name exists in the database");
         }
-        DataSerialization.serializeData(getFilePath(), hotels);
-        return element;
+        return super.persist(element);
+
     }
 
     @Override

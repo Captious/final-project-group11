@@ -7,7 +7,9 @@ public class AddNewUserAction extends AbstractUserAction {
     public void execute(CommandLine commandLine) {
         System.out.println("Input user name and surname.");
         String userNameAndSurname = getValidString();
-        User user = new User(userNameAndSurname);
+        System.out.println("Input user login.");
+        String userLogin = getValidString();
+        User user = new User(userNameAndSurname,userLogin);
         try {
             userManageService.add(user);
         } catch (RuntimeException e) {

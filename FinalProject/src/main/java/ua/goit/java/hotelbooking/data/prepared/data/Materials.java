@@ -110,11 +110,11 @@ public class Materials {
     }
 
     private void setUsers() {
-        users.add(new User("Sergey Petrov"));
-        users.add(new User("Irina Drozd"));
-        users.add(new User("Maksim Mironov"));
-        users.add(new User("Oleg Kovalenko"));
-        users.add(new User("Marina Talalay"));
+        users.add(new User("Sergey Petrov","Petrov"));
+        users.add(new User("Irina Drozd","Drozd"));
+        users.add(new User("Maksim Mironov","Mironov"));
+        users.add(new User("Oleg Kovalenko","Kovalenko"));
+        users.add(new User("Marina Talalay","Talalay"));
     }
 
     private void setReservation() throws ParseException {

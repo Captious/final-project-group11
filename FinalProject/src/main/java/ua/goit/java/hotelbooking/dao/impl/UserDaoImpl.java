@@ -6,6 +6,7 @@ import ua.goit.java.hotelbooking.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
@@ -35,6 +36,15 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
     @Override
     protected String getFilePath() {
         return FILE_PATH;
+    }
+
+    @Override
+    public User persist(User element) {
+
+        if (this.getAll().stream().anyMatch(h -> h.getLogin().toLowerCase().equals(element.getLogin().toLowerCase()))) {
+            throw new RuntimeException("The user with the same login exists in the database");
+        }
+        return super.persist(element);
     }
 
     @Override
