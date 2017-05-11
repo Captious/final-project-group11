@@ -8,7 +8,11 @@ public class AddNewUserAction extends AbstractUserAction {
         System.out.println("Input user name and surname.");
         String userNameAndSurname = getValidString();
         User user = new User(userNameAndSurname);
-        userManageService.add(user);
+        try {
+            userManageService.add(user);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

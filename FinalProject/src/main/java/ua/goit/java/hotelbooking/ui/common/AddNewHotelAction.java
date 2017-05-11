@@ -11,7 +11,11 @@ public class AddNewHotelAction extends AbstractHotelAction {
         System.out.println("Input hotel city:");
         String hotelCity = getValidString();
         Hotel hotel = new Hotel(hotelName, hotelCity);
-        hotelManageService.add(hotel);
+        try {
+            hotelManageService.add(hotel);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

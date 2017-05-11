@@ -39,7 +39,7 @@ public class ReservationDaoImpl extends BaseDaoImpl<Reservation> implements Rese
     @Override
     public Reservation persist(Reservation element) {
         List<Reservation> reservation = getAll();
-        if (element.getId() != null) {
+        if (element.getId() != null || reservation.contains(element)) {
             throw new RuntimeException(String.format("This reservation already exists in the database %s", ENTITY));
         } else {
             increaseLastId();

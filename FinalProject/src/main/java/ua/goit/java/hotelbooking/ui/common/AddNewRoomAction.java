@@ -11,7 +11,11 @@ public class AddNewRoomAction extends AbstractHotelAction {
         System.out.println("Input room number.");
         String roomNumber = getValidString();
         Room room = new Room(roomNumber, hotel);
-        hotelManageService.addRoom(hotel, room);
+        try {
+            hotelManageService.addRoom(hotel, room);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

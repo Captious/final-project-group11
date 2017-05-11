@@ -16,7 +16,11 @@ public class AddReservationAction extends AbstractReservationAction {
         System.out.println("Select room:");
         Room room = commandLine.choose(roomManageService.getAll());
         Date reservationDate = getValidReservationDate();
-        reservationService.add(room, reservationDate, user);
+        try {
+            reservationService.add(room, reservationDate, user);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private Date getValidReservationDate() {
