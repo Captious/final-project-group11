@@ -20,7 +20,7 @@ public abstract class BaseDaoImpl<T extends BaseModel> extends IdCollectionHolde
         List<T> entityList = getAll();
         if (element.getId() == null) {
             if (entityList.contains(element)) {
-                throw new RuntimeException(String.format("This reservation already exists in the database %s",
+                throw new RuntimeException(String.format("This element already exists in the database %s",
                         getEntityName()));
             }
             increaseLastId();
