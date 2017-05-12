@@ -1,6 +1,5 @@
-package ua.goit.java.hotelbooking;
+package ua.goit.java.hotelbooking.data.prepared.data;
 
-import ua.goit.java.hotelbooking.data.prepared.data.Materials;
 import ua.goit.java.hotelbooking.model.Hotel;
 import ua.goit.java.hotelbooking.model.Reservation;
 import ua.goit.java.hotelbooking.model.Room;
@@ -12,8 +11,7 @@ import ua.goit.java.hotelbooking.services.impl.UserManageServiceImpl;
 import java.text.ParseException;
 import java.util.List;
 
-//Этот класс только для тестирования записи/чтения данных и для записи исходных данных(сброса).
-public class Test {
+public class FactoryDataReset {
 
     public static void main(String[] args) throws ParseException {
         resetAndViewData();

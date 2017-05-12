@@ -3,7 +3,6 @@ package ua.goit.java.hotelbooking.dao.impl;
 import ua.goit.java.hotelbooking.dao.BaseDao;
 import ua.goit.java.hotelbooking.dao.utils.DataSerialization;
 import ua.goit.java.hotelbooking.model.BaseModel;
-import ua.goit.java.hotelbooking.model.User;
 
 import java.util.List;
 import java.util.stream.IntStream;
