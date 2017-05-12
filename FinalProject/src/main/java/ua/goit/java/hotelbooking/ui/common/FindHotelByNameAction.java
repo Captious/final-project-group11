@@ -9,7 +9,7 @@ public class FindHotelByNameAction extends AbstractHotelAction {
         String hotelCity = getValidString();
         System.out.println("Input hotel name for search:");
         String hotelName = getValidString();
-                
+
         Hotel hotel = hotelManageService.findByName(hotelName,hotelCity);
         System.out.printf("Find hotel:\n %s \n", hotel);
     }

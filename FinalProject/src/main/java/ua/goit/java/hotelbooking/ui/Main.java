@@ -8,10 +8,11 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         CommandLine commandLine = new CommandLine();
-        List<Action> mainActions = Arrays.asList(new HotelAction(), new RoomAction(), new UserAction(), new ReservationAction());
-        while (true) {
-            Action action = commandLine.choose(mainActions);
-            action.execute(commandLine);
+        MainAction mainAction = new MainAction();
+
+        while (true){
+            mainAction.execute(commandLine);
         }
+
     }
 }

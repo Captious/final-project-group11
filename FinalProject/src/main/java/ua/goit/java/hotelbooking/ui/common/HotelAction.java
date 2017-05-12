@@ -12,7 +12,8 @@ public class HotelAction implements Action {
             new EditRoomAction(),
             new RemoveRoomAction(),
             new FindHotelByCityAction(),
-            new FindHotelByNameAction());
+            new FindHotelByNameAction(),
+            new MainAction());
 
     @Override
     public void execute(CommandLine commandLine) {
