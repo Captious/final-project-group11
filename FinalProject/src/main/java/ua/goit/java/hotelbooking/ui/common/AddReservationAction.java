@@ -9,18 +9,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddReservationAction extends AbstractReservationAction {
+
     @Override
-    public void execute(CommandLine commandLine) {
+    public void execute() {
         System.out.println("Select user:");
         User user = commandLine.choose(userManageService.getAll());
         System.out.println("Select room:");
         Room room = commandLine.choose(roomManageService.getAll());
         Date reservationDate = getValidReservationDate();
-        try {
-            reservationService.add(room, reservationDate, user);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-        }
+        reservationService.add(room, reservationDate, user);
     }
 
     private Date getValidReservationDate() {

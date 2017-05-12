@@ -3,8 +3,9 @@ package ua.goit.java.hotelbooking.ui.common;
 import ua.goit.java.hotelbooking.model.Hotel;
 
 public class EditHotelAction extends AbstractHotelAction {
+
     @Override
-    public void execute(CommandLine commandLine) {
+    public void execute() {
         System.out.println("Select hotel:");
         Hotel hotel = commandLine.choose(hotelManageService.getAll());
         System.out.println("Input new hotel name:");
@@ -13,11 +14,7 @@ public class EditHotelAction extends AbstractHotelAction {
         String hotelCity = getValidString();
         hotel.setName(hotelName);
         hotel.setCity(hotelCity);
-        try {
-            hotelManageService.edit(hotel);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-        }
+        hotelManageService.edit(hotel);
     }
 
     @Override

@@ -3,15 +3,12 @@ package ua.goit.java.hotelbooking.ui.common;
 import ua.goit.java.hotelbooking.model.User;
 
 public class RemoveUserAction extends AbstractUserAction {
+
     @Override
-    public void execute(CommandLine commandLine) {
+    public void execute() {
         System.out.println("Select user:");
         User user = commandLine.choose(userManageService.getAll());
-        try {
-            userManageService.remove(user);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-        }
+        userManageService.remove(user);
     }
 
     @Override

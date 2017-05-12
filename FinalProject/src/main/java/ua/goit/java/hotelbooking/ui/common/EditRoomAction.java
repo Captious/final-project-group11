@@ -14,7 +14,7 @@ public class EditRoomAction extends AbstractHotelAction {
 
 
     @Override
-    public void execute(CommandLine commandLine) {
+    public void execute() {
         System.out.println("Select hotel:");
         Hotel hotel = commandLine.choose(hotelManageService.getAll());
         System.out.println("Select room:");
@@ -22,11 +22,7 @@ public class EditRoomAction extends AbstractHotelAction {
         System.out.println("Input new room number:");
         String roomNumber = getValidString();
         room.setNumber(roomNumber);
-        try {
-            roomManageService.edit(room);
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-        }
+        roomManageService.edit(room);
     }
 
     @Override
