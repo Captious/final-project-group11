@@ -6,11 +6,9 @@ public class FindHotelByNameAction extends AbstractHotelAction {
 
     @Override
     public void execute() {
-        System.out.println("Input city name for search:");
-        String hotelCity = getValidString();
         System.out.println("Input hotel name for search:");
         String hotelName = getValidString();
-        Hotel hotel = hotelManageService.findByName(hotelName, hotelCity);
+        Hotel hotel = hotelManageService.findByName(hotelName);
         System.out.printf("Find hotel:\n %s \n", hotel);
     }
 

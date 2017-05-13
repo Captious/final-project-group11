@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface HotelManageService extends ManageService<Hotel> {
     boolean remove(Hotel element);
-    Hotel findByName(String name, String cityName);
+    Hotel findByName(String name);
     List<Hotel> findByCity(String cityName);
     void addRoom(Hotel hotel, Room room);
     boolean removeRoom(Hotel hotel, Room room);

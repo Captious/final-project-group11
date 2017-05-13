@@ -43,9 +43,9 @@ public class HotelDaoImpl extends BaseDaoImpl<Hotel> implements HotelDao {
     }
 
     @Override
-    public Hotel getByName(String name, String cityName) {
+    public Hotel getByName(String name) {
         List<Hotel> answer;
-        answer = this.getByCity(cityName).stream()
+        answer = this.getAll().stream()
                 .filter(hotel -> hotel.getName().toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
         if (answer.size() > 1) {

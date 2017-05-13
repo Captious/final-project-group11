@@ -47,8 +47,8 @@ public class HotelManageServiceImpl implements HotelManageService {
     }
 
     @Override
-    public Hotel findByName(String name, String cityName) {
-        return hotelDao.getByName(name, cityName);
+    public Hotel findByName(String name) {
+        return hotelDao.getByName(name);
     }
 
     @Override
