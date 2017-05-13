@@ -14,8 +14,8 @@ public class EditUserAction extends AbstractUserAction {
         userManageService.edit(user);
         System.out.println("Input user login.");
         String userLogin = getValidString();
-        User userCheck = new User(userNameAndSurname, userLogin);
-        userManageService.add(userCheck);
+        user.setLogin(userLogin);
+        userManageService.add(user);
     }
 
     @Override
